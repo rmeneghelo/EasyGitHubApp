@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="githubRepositoryName">#303F9F</color>
+    <color name="githubRepositoryDescription">#222222</color>
+    <color name="githubRepositoryForksNumber">#898400</color>
+    <color name="githubRepositoryStarsNumber">#898400</color>
+    <color name="githubRepositoryAuthorName">#4c65ff</color>
+    <color name="githubRepositoryAuthorPhoto">#4c65ff</color>
+
 </resources>
