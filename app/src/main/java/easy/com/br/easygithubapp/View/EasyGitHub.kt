@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.Application
+package easy.com.br.easygithubapp.View
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
