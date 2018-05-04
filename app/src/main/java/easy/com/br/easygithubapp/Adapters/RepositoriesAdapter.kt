@@ -9,10 +9,10 @@ import easy.com.br.easygithubapp.Model.Repository
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.github_repository_row.view.*
 
-class RepositoriesAdapter(items: MutableList<Repository>, val clickListener: (Repository) -> Unit)
+class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Repository) -> Unit)
     : RecyclerView.Adapter<RepositoriesAdapter.MyViewHolder>() {
 
-    var repositoriesList: MutableList<Repository> = items
+    var repositoriesList: List<Repository>? = items
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var githubRepositoryName: TextView = view.githubRepositoryName
@@ -33,11 +33,11 @@ class RepositoriesAdapter(items: MutableList<Repository>, val clickListener: (Re
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val repository = repositoriesList?.get(position)
         holder.description.text = repository?.description
-        holder.authorName.text = repository?.owner.authorName
-        holder.authorPhoto.text = repository?.owner.authorPhoto
+        holder.authorName.text = repository?.owner?.authorName
+        holder.authorPhoto.text = repository?.owner?.authorPhoto
         holder.starsNumber.text = repository?.starsNumber.toString()
         holder.forksNumber.text = repository?.forksNumber.toString()
     }
 
-    override fun getItemCount(): Int = repositoriesList.size
+    override fun getItemCount(): Int = repositoriesList!!.size
 }

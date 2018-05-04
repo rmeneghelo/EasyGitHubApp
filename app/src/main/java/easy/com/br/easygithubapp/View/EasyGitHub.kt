@@ -19,8 +19,6 @@ import retrofit2.Response
 
 class EasyGitHub : AppCompatActivity() {
 
-    private var repositoriesList: MutableList<Repository> = arrayListOf()
-    private var mAdapter: RepositoriesAdapter? = null
     private var listRepository: RepositoriesResult? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,29 +37,15 @@ class EasyGitHub : AppCompatActivity() {
             override fun onResponse(call: Call<RepositoriesResult>, response: Response<RepositoriesResult?>) {
                 listRepository = response.body()
 
-                Toast.makeText(this@EasyGitHub, listRepository?.items?.size?.toString(), Toast.LENGTH_LONG).show()
+                Toast.makeText(this@EasyGitHub, listRepository?.items?.size.toString(), Toast.LENGTH_LONG).show()
 
-               // lstView.adapter = PeopleAdapter(this@MainActivity, peopleResult?.results)
+                repositories_recycler_view.adapter = RepositoriesAdapter(listRepository?.items){}
             }
         })
-
-        prepareRepositoriesData()
-        mAdapter = RepositoriesAdapter(repositoriesList){}
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repositories_recycler_view.layoutManager = mLayoutManager
         repositories_recycler_view.itemAnimator = DefaultItemAnimator()
         repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        repositories_recycler_view.adapter = mAdapter
-    }
-
-    private fun prepareRepositoriesData(){
-        /*var repository = Repository("Xuxa Repository", "Descriptiooooooooooooooooon", "Xuxa",
-                "Photo", 5, 90)
-        repositoriesList.add(repository)
-
-        var repository2 = Repository("Xuxa2 Repository", "Descriptiooooooooooooooooon 2", "Xuxa 2",
-                "Photo 2", 3, 50)
-        repositoriesList.add(repository2)*/
     }
 }
