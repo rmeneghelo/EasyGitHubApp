@@ -33,8 +33,8 @@ class RepositoriesAdapter(items: MutableList<Repository>, val clickListener: (Re
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val repository = repositoriesList?.get(position)
         holder.description.text = repository?.description
-        holder.authorName.text = repository?.authorName
-        holder.authorPhoto.text = repository?.authorPhoto
+        holder.authorName.text = repository?.owner.authorName
+        holder.authorPhoto.text = repository?.owner.authorPhoto
         holder.starsNumber.text = repository?.starsNumber.toString()
         holder.forksNumber.text = repository?.forksNumber.toString()
     }
