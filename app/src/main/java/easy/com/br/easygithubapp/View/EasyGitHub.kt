@@ -8,9 +8,12 @@ import easy.com.br.easygithubapp.Adapters.RepositoriesAdapter
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.activity_easy_git_hub.*
 import android.support.v7.widget.DividerItemDecoration
-import android.util.Log
 import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
 import easy.com.br.easygithubapp.Model.Repository
+import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.di.modules.Components.GetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.di.modules.GetRepositoriesHandlerModule
+import easy.com.br.easygithubapp.di.modules.RetrofitModule
 
 class EasyGitHub : AppCompatActivity() {
 
@@ -18,7 +21,13 @@ class EasyGitHub : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easy_git_hub)
 
-        val repositoriesList = GetRepositoriesHandler()
+        var component: GetRepositoriesHandlerComponent = DaggerGetRepositoriesHandlerComponent
+                .builder()
+                .getRepositoriesHandlerModule(GetRepositoriesHandlerModule())
+                .retrofitModule(RetrofitModule())
+                .build()
+
+        val repositoriesList = component.getRepositoriesHandler()
                 .GetRepositories()
 
         FillingRepositoriesView(repositoriesList)

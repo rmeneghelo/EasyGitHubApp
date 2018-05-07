@@ -1,25 +1,17 @@
 package easy.com.br.easygithubapp.Repository
 
-import android.util.Log
 import easy.com.br.easygithubapp.Domain.Interfaces.IGithubRepositoriesService
 import easy.com.br.easygithubapp.Model.RepositoriesResult
-import easy.com.br.easygithubapp.Model.Repository
+import easy.com.br.easygithubapp.Services.RetrofitService
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import retrofit2.Retrofit
+import javax.inject.Inject
 
-class GitHubRepository{
-
-    var retrofitService: Retrofit
-
-
-    constructor(retrofit : Retrofit){
-        retrofitService = retrofit
-    }
+class GitHubRepository @Inject constructor(private val retrofitService: RetrofitService){
 
     fun GetRepositories() : Observable<RepositoriesResult> {
-        val service = retrofitService.create<IGithubRepositoriesService>(IGithubRepositoriesService::class.java)
+        val service = retrofitService
+                .Builder()
+                .create<IGithubRepositoriesService>(IGithubRepositoriesService::class.java)
         return service.search()
     }
 }
