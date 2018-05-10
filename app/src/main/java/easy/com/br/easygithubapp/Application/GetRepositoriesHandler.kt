@@ -7,7 +7,6 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.activity_easy_git_hub.*
 import javax.inject.Inject
 
 class GetRepositoriesHandler @Inject constructor(private val repository: GitHubRepository){
