@@ -35,7 +35,7 @@ class EasyGitHub : AppCompatActivity() {
         handler.GetRepositories()
 
         handler
-                .repositoriesResultPublish
+                .repositoriesResult
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
