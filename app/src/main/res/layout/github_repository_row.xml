@@ -42,19 +42,26 @@
         android:textColor="@color/githubRepositoryAuthorName"
         android:layout_below="@id/authorPhoto"/>
 
+    <ImageView
+        android:id="@+id/forksPhoto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/forksNumber"
+        android:layout_below="@id/description"/>
+
     <TextView
         android:id="@+id/forksNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textColor="@color/githubRepositoryForksNumber"
         android:layout_below="@id/description" />
 
     <TextView
         android:id="@+id/starsNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
         android:textColor="@color/githubRepositoryStarsNumber"
         android:layout_below="@id/description"
         android:layout_toRightOf="@id/forksNumber"/>
