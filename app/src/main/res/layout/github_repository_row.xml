@@ -13,7 +13,7 @@
 
     <TextView
         android:id="@+id/githubRepositoryName"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:textColor="@color/githubRepositoryName"
@@ -22,16 +22,17 @@
 
     <TextView
         android:id="@+id/description"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textColor="@color/githubRepositoryDescription"
         android:layout_below="@id/githubRepositoryName" />
 
-    <TextView
+    <ImageView
         android:id="@+id/authorPhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
+        android:layout_width="50dp"
+        android:layout_height="100dp"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/description" />
 
     <TextView
         android:id="@+id/authorName"
@@ -41,18 +42,26 @@
         android:textColor="@color/githubRepositoryAuthorName"
         android:layout_below="@id/authorPhoto"/>
 
+    <ImageView
+        android:id="@+id/forksPhoto"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@id/forksNumber"
+        android:layout_below="@id/description"/>
+
     <TextView
         android:id="@+id/forksNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:textColor="@color/githubRepositoryForksNumber"
         android:layout_below="@id/description" />
 
     <TextView
         android:id="@+id/starsNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="30dp"
         android:textColor="@color/githubRepositoryStarsNumber"
         android:layout_below="@id/description"
         android:layout_toRightOf="@id/forksNumber"/>

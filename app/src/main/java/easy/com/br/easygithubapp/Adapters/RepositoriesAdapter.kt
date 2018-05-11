@@ -4,7 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import easy.com.br.easygithubapp.Model.Repository
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.github_repository_row.view.*
@@ -18,7 +20,8 @@ class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Reposito
         var githubRepositoryName: TextView = view.githubRepositoryName
         var description: TextView = view.description
         var authorName: TextView = view.authorName
-        var authorPhoto: TextView = view.authorPhoto
+        var authorPhoto: ImageView = view.authorPhoto
+        var forksPhoto: ImageView = view.forksPhoto
         var starsNumber: TextView = view.starsNumber
         var forksNumber: TextView = view.forksNumber
     }
@@ -32,11 +35,22 @@ class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Reposito
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val repository = repositoriesList?.get(position)
+        holder.githubRepositoryName.text = repository?.githubRepositoryName
         holder.description.text = repository?.description
         holder.authorName.text = repository?.owner?.authorName
-        holder.authorPhoto.text = repository?.owner?.authorPhoto
         holder.starsNumber.text = repository?.starsNumber.toString()
         holder.forksNumber.text = repository?.forksNumber.toString()
+        if(repository?.owner?.authorPhoto!!.isNotEmpty())
+        {
+            Picasso
+                    .get()
+                    .load(repository?.owner?.authorPhoto)
+                    .into(holder.authorPhoto)
+        }
+        Picasso
+                .get()
+                .load(R.drawable.repo_fork)
+                .into(holder.forksPhoto)
     }
 
     override fun getItemCount(): Int = repositoriesList!!.size
