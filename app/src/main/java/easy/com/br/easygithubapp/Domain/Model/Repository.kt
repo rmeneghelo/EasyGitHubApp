@@ -9,6 +9,7 @@ data class Repository(
         var githubRepositoryName: String,
         var description: String,
         var owner: Owner,
+        var license: License,
         @SerializedName("stargazers_count")
         var starsNumber: Int,
         @SerializedName("forks_count")
@@ -19,4 +20,9 @@ data class Owner(
         var authorName: String,
         @SerializedName("avatar_url")
         var authorPhoto: String
+)
+
+data class License(
+        @SerializedName("key")
+        var licenseKey: String
 )

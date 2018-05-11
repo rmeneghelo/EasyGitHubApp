@@ -1,6 +1,9 @@
 package easy.com.br.easygithubapp.Application
 
 import android.util.Log
+import easy.com.br.easygithubapp.Domain.Model.License
+import easy.com.br.easygithubapp.Domain.Model.Owner
+import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
 import easy.com.br.easygithubapp.Model.RepositoriesResult
 import easy.com.br.easygithubapp.Repository.GitHubRepository
 import io.reactivex.Observable
@@ -11,8 +14,8 @@ import javax.inject.Inject
 
 class GetRepositoriesHandler @Inject constructor(private val repository: GitHubRepository){
 
-    private val repositoriesResultPublish = PublishSubject.create<RepositoriesResult>()
-    val repositoriesResult: Observable<RepositoriesResult> get() = repositoriesResultPublish
+    private val repositoriesResultPublish = PublishSubject.create<List<RepositoryDto>>()
+    val repositoriesResult: Observable<List<RepositoryDto>> get() = repositoriesResultPublish
 
     fun GetRepositories() {
         repository
@@ -22,13 +25,33 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                 .subscribe(
                         {
                             result ->
+                            var repositoryDto: List<RepositoryDto> = result.items.map { repoResult ->
+                                RepositoryDto(repoResult.githubRepositoryName,
+                                        repoResult.description,
+                                        Owner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
+                                        CheckApacheLicense(repoResult.license?.licenseKey),
+                                        repoResult.starsNumber,
+                                        repoResult.forksNumber)
+                            }
                             Log.d("Xuxa tentativa 1", result.items.size.toString())
-                            repositoriesResultPublish.onNext(result)
+                            repositoriesResultPublish.onNext(repositoryDto)
                             repositoriesResultPublish.onComplete()
                         },
                         {
-                            e -> Log.d("Xuxa tentativa erro", e.message)
+                            e ->
+                            Log.d("Xuxa tentativa erro", e.message)
+                            repositoriesResultPublish.onError(e)
                         }
                 )
     }
+
+    private fun CheckApacheLicense(key: String): License {
+        var isApache = false
+        if(!key.isNullOrEmpty() && key.contains("Apache", true)) {
+            isApache = true
+        }
+
+        return License(isApache)
+    }
+
 }

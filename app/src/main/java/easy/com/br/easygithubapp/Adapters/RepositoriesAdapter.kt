@@ -1,5 +1,7 @@
 package easy.com.br.easygithubapp.Adapters
 
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -7,14 +9,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import easy.com.br.easygithubapp.Model.Repository
+import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.github_repository_row.view.*
 
-class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Repository) -> Unit)
+class RepositoriesAdapter(items: List<RepositoryDto>?, val clickListener: (RepositoryDto) -> Unit)
     : RecyclerView.Adapter<RepositoriesAdapter.MyViewHolder>() {
 
-    var repositoriesList: List<Repository>? = items
+    var repositoriesList: List<RepositoryDto>? = items
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var githubRepositoryName: TextView = view.githubRepositoryName
@@ -51,7 +53,12 @@ class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Reposito
                 .get()
                 .load(R.drawable.repo_fork)
                 .into(holder.forksPhoto)
+
+        if(repository.license.isApacheLicense){
+            holder.itemView.setBackgroundColor(Color.LTGRAY)
+        }
     }
+
 
     override fun getItemCount(): Int = repositoriesList!!.size
 }

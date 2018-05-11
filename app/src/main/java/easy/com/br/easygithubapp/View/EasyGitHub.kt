@@ -9,7 +9,7 @@ import easy.com.br.easygithubapp.R
 import android.support.v7.widget.DividerItemDecoration
 import android.util.Log
 import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
-import easy.com.br.easygithubapp.Model.Repository
+import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
 import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.Components.GetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
@@ -41,8 +41,8 @@ class EasyGitHub : AppCompatActivity() {
                 .subscribe(
                         {
                             result ->
-                            Log.d("Xuxa tentativa 1", result.items.size.toString())
-                            FillingRepositoriesView(result.items)
+                            Log.d("Xuxa tentativa 1", result.size.toString())
+                            FillingRepositoriesView(result)
                         },
                         {
                             e -> Log.d("Xuxa tentativa erro", e.message)
@@ -53,7 +53,7 @@ class EasyGitHub : AppCompatActivity() {
                 )
     }
 
-    private fun FillingRepositoriesView(repositoriesList: List<Repository>){
+    private fun FillingRepositoriesView(repositoriesList: List<RepositoryDto>){
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repositories_recycler_view.layoutManager = mLayoutManager
