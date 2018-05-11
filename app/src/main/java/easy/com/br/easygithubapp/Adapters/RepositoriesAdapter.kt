@@ -60,7 +60,12 @@ class RepositoriesAdapter(items: List<RepositoryDto>?, val clickListener: (Repos
         else{
             holder.itemView.setBackgroundColor(Color.WHITE)
         }
+
+        holder.itemView.setOnClickListener({
+            clickListener(repository)
+        })
     }
+
 
 
     override fun getItemCount(): Int = repositoriesList!!.size

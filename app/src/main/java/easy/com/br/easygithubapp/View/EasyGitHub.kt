@@ -1,5 +1,6 @@
 package easy.com.br.easygithubapp.View
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
@@ -59,6 +60,11 @@ class EasyGitHub : AppCompatActivity() {
         repositories_recycler_view.layoutManager = mLayoutManager
         repositories_recycler_view.itemAnimator = DefaultItemAnimator()
         repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        repositories_recycler_view.adapter = RepositoriesAdapter(repositoriesList){}
+        repositories_recycler_view.adapter = RepositoriesAdapter(repositoriesList){
+            val intent = Intent(this@EasyGitHub, EasyGitHubDetails::class.java)
+
+            intent.putExtra("repositoryId", it.githubRepositoryName)
+            startActivity(intent)
+        }
     }
 }
