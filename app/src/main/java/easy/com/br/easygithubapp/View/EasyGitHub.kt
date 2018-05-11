@@ -5,63 +5,61 @@ import android.os.Bundle
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import easy.com.br.easygithubapp.Adapters.RepositoriesAdapter
-import easy.com.br.easygithubapp.Model.Repository
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.activity_easy_git_hub.*
 import android.support.v7.widget.DividerItemDecoration
-import android.widget.Toast
-import easy.com.br.easygithubapp.Domain.Interfaces.IGithubRepositoriesService
-import easy.com.br.easygithubapp.Model.RepositoriesResult
-import easy.com.br.easygithubapp.Services.RetrofitService
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import android.util.Log
+import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
+import easy.com.br.easygithubapp.Model.Repository
+import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.di.modules.Components.GetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
+import easy.com.br.easygithubapp.di.modules.RetrofitModule
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class EasyGitHub : AppCompatActivity() {
-
-    private var repositoriesList: MutableList<Repository> = arrayListOf()
-    private var mAdapter: RepositoriesAdapter? = null
-    private var listRepository: RepositoriesResult? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easy_git_hub)
 
-        val retrofitService = RetrofitService().Builder()
-        val service = retrofitService.create<IGithubRepositoriesService>(IGithubRepositoriesService::class.java)
-        val result = service.search()
+        var component: GetRepositoriesHandlerComponent = DaggerGetRepositoriesHandlerComponent
+                .builder()
+                .gitHubRepositoryModule(GitHubRepositoryModule())
+                //.getRepositoriesHandlerModule(GetRepositoriesHandlerModule())
+                .retrofitModule(RetrofitModule())
+                .build()
 
-        result.enqueue(object : Callback<RepositoriesResult> {
-            override fun onFailure(call: Call<RepositoriesResult?>, t: Throwable?) {
-                Toast.makeText(this@EasyGitHub, t.toString(), Toast.LENGTH_LONG).show()
-            }
+        val handler : GetRepositoriesHandler = component.getRepositoriesHandler()
 
-            override fun onResponse(call: Call<RepositoriesResult>, response: Response<RepositoriesResult?>) {
-                listRepository = response.body()
+        handler.GetRepositories()
 
-                Toast.makeText(this@EasyGitHub, listRepository?.items?.size?.toString(), Toast.LENGTH_LONG).show()
+        handler
+                .repositoriesResult
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        {
+                            result ->
+                            Log.d("Xuxa tentativa 1", result.items.size.toString())
+                            FillingRepositoriesView(result.items)
+                        },
+                        {
+                            e -> Log.d("Xuxa tentativa erro", e.message)
+                        },
+                        {
+                            repositories_recycler_view.adapter.notifyDataSetChanged()
+                        }
+                )
+    }
 
-               // lstView.adapter = PeopleAdapter(this@MainActivity, peopleResult?.results)
-            }
-        })
-
-        prepareRepositoriesData()
-        mAdapter = RepositoriesAdapter(repositoriesList){}
-
+    private fun FillingRepositoriesView(repositoriesList: List<Repository>){
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repositories_recycler_view.layoutManager = mLayoutManager
         repositories_recycler_view.itemAnimator = DefaultItemAnimator()
         repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        repositories_recycler_view.adapter = mAdapter
+        repositories_recycler_view.adapter = RepositoriesAdapter(repositoriesList){}
     }
 
-    private fun prepareRepositoriesData(){
-        /*var repository = Repository("Xuxa Repository", "Descriptiooooooooooooooooon", "Xuxa",
-                "Photo", 5, 90)
-        repositoriesList.add(repository)
-
-        var repository2 = Repository("Xuxa2 Repository", "Descriptiooooooooooooooooon 2", "Xuxa 2",
-                "Photo 2", 3, 50)
-        repositoriesList.add(repository2)*/
-    }
 }
