@@ -10,7 +10,6 @@ import javax.inject.Singleton
 class GetRepositoriesHandlerModule {
 
     @Provides
-    @Singleton
     fun provideGetRepsitoriesHandlerModule(gitHubRepository: GitHubRepository): GetRepositoriesHandler {
         return GetRepositoriesHandler(gitHubRepository)
     }

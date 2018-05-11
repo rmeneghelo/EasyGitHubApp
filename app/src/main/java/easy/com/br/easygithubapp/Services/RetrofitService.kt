@@ -1,17 +1,18 @@
 package easy.com.br.easygithubapp.Services
-
+/*
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 interface IRetrofitService {
     fun Builder() : Retrofit
 }
 
-class RetrofitService(private val gson: Gson, private val httpBuilder: OkHttpClient.Builder ) : IRetrofitService {
+class RetrofitService @Inject constructor(private val gson: Gson, private val httpBuilder: OkHttpClient.Builder ) : IRetrofitService {
 
     override fun Builder(): Retrofit {
         val logging = HttpLoggingInterceptor()
@@ -25,4 +26,4 @@ class RetrofitService(private val gson: Gson, private val httpBuilder: OkHttpCli
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build()
     }
-}
+}*/

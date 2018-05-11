@@ -13,7 +13,7 @@ import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
 import easy.com.br.easygithubapp.Model.Repository
 import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.Components.GetRepositoriesHandlerComponent
-import easy.com.br.easygithubapp.di.modules.GetRepositoriesHandlerModule
+import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +26,8 @@ class EasyGitHub : AppCompatActivity() {
 
         var component: GetRepositoriesHandlerComponent = DaggerGetRepositoriesHandlerComponent
                 .builder()
-                .getRepositoriesHandlerModule(GetRepositoriesHandlerModule())
+                .gitHubRepositoryModule(GitHubRepositoryModule())
+                //.getRepositoriesHandlerModule(GetRepositoriesHandlerModule())
                 .retrofitModule(RetrofitModule())
                 .build()
 
