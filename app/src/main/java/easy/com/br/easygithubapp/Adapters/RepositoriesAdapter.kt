@@ -54,8 +54,11 @@ class RepositoriesAdapter(items: List<RepositoryDto>?, val clickListener: (Repos
                 .load(R.drawable.repo_fork)
                 .into(holder.forksPhoto)
 
-        if(repository.license.isApacheLicense){
+        if(repository?.license.isApacheLicense){
             holder.itemView.setBackgroundColor(Color.LTGRAY)
+        }
+        else{
+            holder.itemView.setBackgroundColor(Color.WHITE)
         }
     }
 
