@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingBottom="@dimen/row_padding_vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -15,15 +15,14 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:textColor="@color/githubRepositoryName"
         android:textSize="16dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/authorPhoto"
+        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,13 +31,10 @@
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/githubRepositoryName"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/githubRepositoryDescription"
         app:layout_constraintEnd_toStartOf="@+id/authorPhoto"
+        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/githubRepositoryName" />
 
@@ -50,8 +46,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_toRightOf="@id/description"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/authorName"
@@ -68,8 +63,8 @@
 
     <ImageView
         android:id="@+id/forksPhoto"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_alignParentLeft="true"
         android:layout_below="@id/description"
         android:layout_marginLeft="8dp"
@@ -91,17 +86,27 @@
         app:layout_constraintStart_toEndOf="@+id/forksPhoto"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
+    <ImageView
+        android:id="@+id/starPhoto"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/forksNumber"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
+
     <TextView
         android:id="@+id/starsNumber"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_below="@id/description"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/forksNumber"
         android:textColor="@color/githubRepositoryStarsNumber"
-        app:layout_constraintStart_toEndOf="@+id/forksNumber"
+        app:layout_constraintStart_toEndOf="@+id/starPhoto"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
 </android.support.constraint.ConstraintLayout>

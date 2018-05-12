@@ -27,6 +27,7 @@ class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Reposito
         var forksPhoto: ImageView = view.forksPhoto
         var starsNumber: TextView = view.starsNumber
         var forksNumber: TextView = view.forksNumber
+        var starPhoto: ImageView = view.starPhoto
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -54,6 +55,11 @@ class RepositoriesAdapter(items: List<Repository>?, val clickListener: (Reposito
                 .get()
                 .load(R.drawable.repo_fork)
                 .into(holder.forksPhoto)
+
+        Picasso
+                .get()
+                .load(R.drawable.star_repository)
+                .into(holder.starPhoto)
 
         if(repository?.license.isApacheLicense){
             holder.itemView.setBackgroundColor(Color.LTGRAY)
