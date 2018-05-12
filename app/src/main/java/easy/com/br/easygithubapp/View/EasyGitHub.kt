@@ -38,6 +38,35 @@ class EasyGitHub : AppCompatActivity() {
 
         val handler : GetRepositoriesHandler = component.getRepositoriesHandler()
 
+        GetRepositories(handler)
+
+        swipeRefresh.setOnRefreshListener {
+            GetRepositories(handler)
+            onItemsLoadComplete()
+        }
+    }
+
+    private fun FillingRepositoriesView(repository: RepositoryDto){
+
+        val mLayoutManager = LinearLayoutManager(applicationContext)
+        repositories_recycler_view.layoutManager = mLayoutManager
+        repositories_recycler_view.itemAnimator = DefaultItemAnimator()
+        repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        repositories_recycler_view.adapter = RepositoriesAdapter(repository.listRepositories){
+            val intent = Intent(this@EasyGitHub, EasyGitHubDetails::class.java)
+
+            intent.putExtra("repositoryId", it.githubRepositoryName)
+            startActivity(intent)
+        }
+
+        tvTotal.text = "Total of repositories: "
+        val totalCount = SpannableString(repository.totalCount.toString())
+
+        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        tvTotal.append(totalCount)
+    }
+
+    private fun GetRepositories(handler: GetRepositoriesHandler){
         handler.GetRepositories()
 
         handler
@@ -59,23 +88,7 @@ class EasyGitHub : AppCompatActivity() {
                 )
     }
 
-    private fun FillingRepositoriesView(repository: RepositoryDto){
-
-        val mLayoutManager = LinearLayoutManager(applicationContext)
-        repositories_recycler_view.layoutManager = mLayoutManager
-        repositories_recycler_view.itemAnimator = DefaultItemAnimator()
-        repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        repositories_recycler_view.adapter = RepositoriesAdapter(repository.listRepositories){
-            val intent = Intent(this@EasyGitHub, EasyGitHubDetails::class.java)
-
-            intent.putExtra("repositoryId", it.githubRepositoryName)
-            startActivity(intent)
-        }
-
-        tvTotal.text = "Total of repositories: "
-        val totalCount = SpannableString(repository.totalCount.toString())
-
-        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvTotal.append(totalCount)
+    fun onItemsLoadComplete() {
+        swipeRefresh.isRefreshing = false
     }
 }

@@ -15,13 +15,23 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/repositories_recycler_view"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/repositories_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>
