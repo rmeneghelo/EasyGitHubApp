@@ -1,16 +1,20 @@
 package easy.com.br.easygithubapp.View
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import easy.com.br.easygithubapp.Adapters.RepositoriesAdapter
-import easy.com.br.easygithubapp.R
 import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.util.Log
+import easy.com.br.easygithubapp.Adapters.RepositoriesAdapter
 import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
 import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
+import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.Components.GetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
@@ -18,6 +22,7 @@ import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_easy_git_hub.*
+
 
 class EasyGitHub : AppCompatActivity() {
 
@@ -42,7 +47,7 @@ class EasyGitHub : AppCompatActivity() {
                 .subscribe(
                         {
                             result ->
-                            Log.d("Xuxa tentativa 1", result.size.toString())
+                            Log.d("Xuxa tentativa 1", result.listRepositories.size.toString())
                             FillingRepositoriesView(result)
                         },
                         {
@@ -54,17 +59,23 @@ class EasyGitHub : AppCompatActivity() {
                 )
     }
 
-    private fun FillingRepositoriesView(repositoriesList: List<RepositoryDto>){
+    private fun FillingRepositoriesView(repository: RepositoryDto){
 
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repositories_recycler_view.layoutManager = mLayoutManager
         repositories_recycler_view.itemAnimator = DefaultItemAnimator()
         repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        repositories_recycler_view.adapter = RepositoriesAdapter(repositoriesList){
+        repositories_recycler_view.adapter = RepositoriesAdapter(repository.listRepositories){
             val intent = Intent(this@EasyGitHub, EasyGitHubDetails::class.java)
 
             intent.putExtra("repositoryId", it.githubRepositoryName)
             startActivity(intent)
         }
+
+        tvTotal.text = "Total of repositories: "
+        val totalCount = SpannableString(repository.totalCount.toString())
+
+        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        tvTotal.append(totalCount)
     }
 }

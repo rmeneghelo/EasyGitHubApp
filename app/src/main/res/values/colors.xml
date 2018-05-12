@@ -9,5 +9,6 @@
     <color name="githubRepositoryStarsNumber">#898400</color>
     <color name="githubRepositoryAuthorName">#4c65ff</color>
     <color name="githubRepositoryAuthorPhoto">#4c65ff</color>
+    <color name="githubRepositoryTotal">#dbdbdb</color>
 
 </resources>

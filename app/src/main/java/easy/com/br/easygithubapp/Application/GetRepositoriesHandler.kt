@@ -3,6 +3,7 @@ package easy.com.br.easygithubapp.Application
 import android.util.Log
 import easy.com.br.easygithubapp.Domain.Model.License
 import easy.com.br.easygithubapp.Domain.Model.Owner
+import easy.com.br.easygithubapp.Domain.Model.Repository
 import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
 import easy.com.br.easygithubapp.Model.RepositoriesResult
 import easy.com.br.easygithubapp.Repository.GitHubRepository
@@ -14,8 +15,8 @@ import javax.inject.Inject
 
 class GetRepositoriesHandler @Inject constructor(private val repository: GitHubRepository){
 
-    private val repositoriesResultPublish = PublishSubject.create<List<RepositoryDto>>()
-    val repositoriesResult: Observable<List<RepositoryDto>> get() = repositoriesResultPublish
+    private val repositoriesResultPublish = PublishSubject.create<RepositoryDto>()
+    val repositoriesResult: Observable<RepositoryDto> get() = repositoriesResultPublish
 
     fun GetRepositories() {
         repository
@@ -25,8 +26,8 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                 .subscribe(
                         {
                             result ->
-                            var repositoryDto: List<RepositoryDto> = result.items.map { repoResult ->
-                                RepositoryDto(repoResult.githubRepositoryName,
+                            var repositoriesList: List<Repository> = result.items.map { repoResult ->
+                                Repository(repoResult.githubRepositoryName,
                                         repoResult.description,
                                         Owner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
                                         CheckApacheLicense(repoResult.license?.licenseKey),
@@ -34,7 +35,9 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                                         repoResult.forksNumber)
                             }
                             Log.d("Xuxa tentativa 1", result.items.size.toString())
-                            repositoriesResultPublish.onNext(repositoryDto)
+
+
+                            repositoriesResultPublish.onNext(RepositoryDto(result.total_count, repositoriesList))
                             repositoriesResultPublish.onComplete()
                         },
                         {
