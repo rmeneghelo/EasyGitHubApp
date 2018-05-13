@@ -13,7 +13,9 @@ data class Repository(
         @SerializedName("stargazers_count")
         var starsNumber: Int,
         @SerializedName("forks_count")
-        var forksNumber: Int)
+        var forksNumber: Int,
+        @SerializedName("open_issues")
+        var openIssuesNumber: Int)
 
 data class Owner(
         @SerializedName("login")

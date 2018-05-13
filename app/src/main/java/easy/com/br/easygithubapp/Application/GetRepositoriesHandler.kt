@@ -32,12 +32,13 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                                         Owner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
                                         CheckApacheLicense(repoResult.license?.licenseKey),
                                         repoResult.starsNumber,
-                                        repoResult.forksNumber)
+                                        repoResult.forksNumber,
+                                        repoResult.openIssuesNumber)
                             }
                             Log.d("Xuxa tentativa 1", result.items.size.toString())
 
 
-                            repositoriesResultPublish.onNext(RepositoryDto(result.total_count, repositoriesList))
+                            repositoriesResultPublish.onNext(RepositoryDto(result.total_count, CheckOpenIssuesMoreThanHundred(repositoriesList), repositoriesList))
                             repositoriesResultPublish.onComplete()
                         },
                         {
@@ -46,6 +47,10 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                             repositoriesResultPublish.onError(e)
                         }
                 )
+    }
+
+    private fun CheckOpenIssuesMoreThanHundred(repositoriesList: List<Repository>): Int {
+        return repositoriesList.count { repository -> repository.openIssuesNumber > 100 }
     }
 
     private fun CheckApacheLicense(key: String): License {

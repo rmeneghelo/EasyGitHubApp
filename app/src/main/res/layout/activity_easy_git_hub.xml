@@ -8,19 +8,36 @@
 
     <TextView
         android:id="@+id/tvTotal"
-        android:background="@color/githubRepositoryTotal"
-        android:textSize="18sp"
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"/>
+        android:background="@color/githubRepositoryTotal"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvTotalIssues"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/githubRepositoryTotal"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotal" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tvTotal"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalIssues">
 
 
         <android.support.v7.widget.RecyclerView

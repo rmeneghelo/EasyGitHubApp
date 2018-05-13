@@ -47,7 +47,6 @@ class EasyGitHub : AppCompatActivity() {
     }
 
     private fun FillingRepositoriesView(repository: RepositoryDto){
-
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repositories_recycler_view.layoutManager = mLayoutManager
         repositories_recycler_view.itemAnimator = DefaultItemAnimator()
@@ -58,12 +57,6 @@ class EasyGitHub : AppCompatActivity() {
             intent.putExtra("repositoryId", it.githubRepositoryName)
             startActivity(intent)
         }
-
-        tvTotal.text = "Total of repositories: "
-        val totalCount = SpannableString(repository.totalCount.toString())
-
-        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvTotal.append(totalCount)
     }
 
     private fun GetRepositories(handler: GetRepositoriesHandler){
@@ -78,6 +71,8 @@ class EasyGitHub : AppCompatActivity() {
                             result ->
                             Log.d("Xuxa tentativa 1", result.listRepositories.size.toString())
                             FillingRepositoriesView(result)
+                            FillingTotalRepositories(result)
+                            FillingTotalOpenIssues(result)
                         },
                         {
                             e -> Log.d("Xuxa tentativa erro", e.message)
@@ -86,6 +81,22 @@ class EasyGitHub : AppCompatActivity() {
                             repositories_recycler_view.adapter.notifyDataSetChanged()
                         }
                 )
+    }
+
+    private fun FillingTotalOpenIssues(result: RepositoryDto?) {
+        tvTotalIssues.text = "Repositories with more than 100 open issues: "
+        val totalCount = SpannableString(result?.openIssuesMoreThanHundred.toString())
+
+        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        tvTotalIssues.append(totalCount)
+    }
+
+    private fun FillingTotalRepositories(result: RepositoryDto?) {
+        tvTotal.text = "Total of repositories: "
+        val totalCount = SpannableString(result?.totalCount.toString())
+
+        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        tvTotal.append(totalCount)
     }
 
     fun onItemsLoadComplete() {
