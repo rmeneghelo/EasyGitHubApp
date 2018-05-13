@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class RepositoryApiResult(var total_count: Int, var items: List<Repository>)
 
 data class Repository(
-        @SerializedName("full_name")
+        @SerializedName("name")
         var githubRepositoryName: String,
         var description: String,
         var owner: Owner,
