@@ -21,8 +21,6 @@
         android:textColor="@color/githubRepositoryName"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/authorPhoto"
-        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,22 +29,27 @@
         android:layout_width="198dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/githubRepositoryName"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/githubRepositoryDescription"
-        app:layout_constraintEnd_toStartOf="@+id/authorPhoto"
-        app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/githubRepositoryName" />
 
     <ImageView
         android:id="@+id/authorPhoto"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:layout_alignParentRight="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/description"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/authorName"
@@ -54,11 +57,14 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_below="@id/authorPhoto"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:textColor="@color/githubRepositoryAuthorName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/authorPhoto"
+        app:layout_constraintStart_toStartOf="@+id/authorPhoto"
         app:layout_constraintTop_toBottomOf="@+id/authorPhoto" />
 
     <ImageView
@@ -108,5 +114,12 @@
         android:textColor="@color/githubRepositoryStarsNumber"
         app:layout_constraintStart_toEndOf="@+id/starPhoto"
         app:layout_constraintTop_toBottomOf="@+id/description" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.71" />
 
 </android.support.constraint.ConstraintLayout>
