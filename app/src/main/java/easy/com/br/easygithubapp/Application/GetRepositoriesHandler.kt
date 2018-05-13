@@ -5,7 +5,6 @@ import easy.com.br.easygithubapp.Domain.Model.License
 import easy.com.br.easygithubapp.Domain.Model.Owner
 import easy.com.br.easygithubapp.Domain.Model.Repository
 import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
-import easy.com.br.easygithubapp.Model.RepositoriesResult
 import easy.com.br.easygithubapp.Repository.GitHubRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
