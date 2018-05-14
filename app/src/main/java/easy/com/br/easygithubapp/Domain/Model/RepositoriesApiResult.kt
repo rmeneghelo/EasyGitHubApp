@@ -2,7 +2,7 @@ package easy.com.br.easygithubapp.Model
 
 import com.google.gson.annotations.SerializedName
 
-data class RepositoryApiResult(var total_count: Int, var items: List<Repository>)
+data class RepositoriesApiResult(var total_count: Int, var items: List<Repository>)
 
 data class Repository(
         @SerializedName("name")

@@ -3,7 +3,9 @@ package easy.com.br.easygithubapp.Domain.Model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class RepositoryDetailApiResult(
+data class RepositoryDetailApiResult(var result: List<RepositoryDetail>)
+
+data class RepositoryDetail(
         @SerializedName("title")
         var pullRequestTitle: String,
         @SerializedName("created_at")

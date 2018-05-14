@@ -1,6 +1,6 @@
 package easy.com.br.easygithubapp.Domain.Interfaces
 
-import easy.com.br.easygithubapp.Model.RepositoryApiResult
+import easy.com.br.easygithubapp.Model.RepositoriesApiResult
 import io.reactivex.Observable
 import retrofit2.http.GET
 
@@ -9,5 +9,5 @@ import retrofit2.http.GET
  */
 interface IGithubRepositoriesService {
     @GET("search/repositories?q=language:Java&sort=stars&page=1")
-    fun search(): Observable<RepositoryApiResult>
+    fun search(): Observable<RepositoriesApiResult>
 }

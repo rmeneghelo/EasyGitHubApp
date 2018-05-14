@@ -54,7 +54,8 @@ class EasyGitHub : AppCompatActivity() {
         repositories_recycler_view.adapter = RepositoriesAdapter(repository.listRepositories){
             val intent = Intent(this@EasyGitHub, EasyGitHubDetails::class.java)
 
-            intent.putExtra("repositoryId", it.githubRepositoryName)
+            intent.putExtra("authorName", it.owner.authorName)
+            intent.putExtra("repositoryName", it.githubRepositoryName)
             startActivity(intent)
         }
     }
