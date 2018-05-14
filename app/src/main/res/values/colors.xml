@@ -10,5 +10,7 @@
     <color name="githubRepositoryAuthorName">#4c65ff</color>
     <color name="githubRepositoryAuthorPhoto">#4c65ff</color>
     <color name="githubRepositoryTotal">#dbdbdb</color>
-
+    <color name="githubRepositoryDetailPRTitle">#4b60e4</color>
+    <color name="githubRepositoryDetailPRCreationDate">#a15555</color>
+    <color name="githubRepositoryDetailPRAuthorName">#4c65ff</color>
 </resources>
