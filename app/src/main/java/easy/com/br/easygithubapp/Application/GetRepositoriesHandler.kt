@@ -1,6 +1,5 @@
 package easy.com.br.easygithubapp.Application
 
-import android.util.Log
 import easy.com.br.easygithubapp.Domain.Model.License
 import easy.com.br.easygithubapp.Domain.Model.Owner
 import easy.com.br.easygithubapp.Domain.Model.Repository
@@ -34,15 +33,12 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                                         repoResult.forksNumber,
                                         repoResult.openIssuesNumber)
                             }
-                            Log.d("Xuxa tentativa 1", result.items.size.toString())
-
 
                             repositoriesResultPublish.onNext(RepositoryDto(result.total_count, CheckOpenIssuesMoreThanHundred(repositoriesList), repositoriesList))
                             repositoriesResultPublish.onComplete()
                         },
                         {
                             e ->
-                            Log.d("Xuxa tentativa erro", e.message)
                             repositoriesResultPublish.onError(e)
                         }
                 )
