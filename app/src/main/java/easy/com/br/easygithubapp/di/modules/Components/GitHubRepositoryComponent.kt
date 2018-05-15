@@ -14,7 +14,7 @@ interface GitHubRepositoryComponent{
 }
 
 @Singleton
-@Component(modules = arrayOf(RetrofitModule::class))
+@Component(modules = arrayOf(RetrofitModule::class, GitHubRepositoryModule::class))
 interface GitHubRepositoryDetailComponent{
     fun getGitHubRepositoryDetailComponent(): GitHubDetailsRepository
 }
