@@ -4,5 +4,5 @@ import easy.com.br.easygithubapp.Model.RepositoriesApiResult
 import io.reactivex.Observable
 
 interface GitHubRepository{
-    fun GetRepositories() : Observable<RepositoriesApiResult>
+    fun getRepositories() : Observable<RepositoriesApiResult>
 }

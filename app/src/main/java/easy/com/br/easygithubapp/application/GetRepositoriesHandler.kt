@@ -18,7 +18,7 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
 
     fun GetRepositories() {
         repository
-                .GetRepositories()
+                .getRepositories()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

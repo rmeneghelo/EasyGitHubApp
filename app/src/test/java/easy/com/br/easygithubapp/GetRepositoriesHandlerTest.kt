@@ -43,7 +43,7 @@ class GetRepositoriesHandlerTest {
 
     @Test
     fun addition_isCorrect() {
-        Mockito.`when`(repository.GetRepositories()).thenReturn(Observable.just(apiResult))
+        Mockito.`when`(repository.getRepositories()).thenReturn(Observable.just(apiResult))
 
         getRepositoriesHandler.GetRepositories()
 

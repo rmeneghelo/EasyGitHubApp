@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class GithubRepositoryImpl @Inject constructor(private val retrofit: Retrofit) : GitHubRepository {
 
-    override fun GetRepositories() : Observable<RepositoriesApiResult> {
+    override fun getRepositories() : Observable<RepositoriesApiResult> {
         val service = retrofit
                 .create<IGithubRepositoriesService>(IGithubRepositoriesService::class.java)
         return service.search()
