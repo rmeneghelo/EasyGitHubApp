@@ -8,13 +8,13 @@ import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = arrayOf(GitHubRepositoryModule::class, RetrofitModule::class))
+@Component(modules = [(GitHubRepositoryModule::class), (RetrofitModule::class)])
 interface GetRepositoriesHandlerComponent{
     fun getRepositoriesHandler(): GetRepositoriesHandler
 }
 
 @Singleton
-@Component(modules = arrayOf(GitHubRepositoryModule::class, RetrofitModule::class))
+@Component(modules = [(GitHubRepositoryModule::class), (RetrofitModule::class)])
 interface GetRepositoryDetailsHandlerComponent{
     fun getRepositoryDetailsHandler(): GetRepositoryDetailsHandler
 }
