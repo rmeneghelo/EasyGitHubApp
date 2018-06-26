@@ -1,7 +1,6 @@
-package easy.com.br.easygithubapp.Adapters
+package easy.com.br.easygithubapp.adapters
 
 import android.graphics.Color
-import android.graphics.drawable.Drawable
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import easy.com.br.easygithubapp.Domain.Model.Repository
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
+import easy.com.br.easygithubapp.domain.model.Repository
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.github_repository_row.view.*
 

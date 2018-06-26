@@ -1,8 +1,8 @@
-package easy.com.br.easygithubapp.Repository.impl
+package easy.com.br.easygithubapp.repository.impl
 
-import easy.com.br.easygithubapp.Domain.Interfaces.IGithubRepositoriesService
+import easy.com.br.easygithubapp.domain.interfaces.IGithubRepositoriesService
 import easy.com.br.easygithubapp.Model.RepositoriesApiResult
-import easy.com.br.easygithubapp.Repository.GitHubRepository
+import easy.com.br.easygithubapp.repository.GitHubRepository
 import io.reactivex.Observable
 import retrofit2.Retrofit
 import javax.inject.Inject

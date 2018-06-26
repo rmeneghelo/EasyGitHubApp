@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.Services
+package easy.com.br.easygithubapp.services
 /*
 import com.google.gson.Gson
 import okhttp3.OkHttpClient

@@ -1,6 +1,6 @@
-package easy.com.br.easygithubapp.Domain.Interfaces
+package easy.com.br.easygithubapp.domain.interfaces
 
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDetail
+import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path

@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.View
+package easy.com.br.easygithubapp.view
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -6,12 +6,12 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import easy.com.br.easygithubapp.Adapters.RepositoryDetailsAdapter
-import easy.com.br.easygithubapp.Application.GetRepositoryDetailsHandler
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDetail
+import easy.com.br.easygithubapp.adapters.RepositoryDetailsAdapter
+import easy.com.br.easygithubapp.application.GetRepositoryDetailsHandler
+import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.R
-import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoryDetailsHandlerComponent
-import easy.com.br.easygithubapp.di.modules.Components.GetRepositoryDetailsHandlerComponent
+import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoryDetailsHandlerComponent
+import easy.com.br.easygithubapp.di.modules.components.GetRepositoryDetailsHandlerComponent
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -47,11 +47,11 @@ class EasyGitHubDetails: AppCompatActivity(){
                 .subscribe(
                         {
                             result ->
-                            Log.d("Repository Details View", result.size.toString())
+                            Log.d("repository Details view", result.size.toString())
                             FillingRepositoriesView(result)
                         },
                         {
-                            e -> Log.d("Repository Details erro", e.message)
+                            e -> Log.d("repository Details erro", e.message)
                         },
                         {
 

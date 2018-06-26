@@ -2,12 +2,10 @@ package easy.com.br.easygithubapp.di.modules
 
 import dagger.Module
 import dagger.Provides
-import easy.com.br.easygithubapp.Repository.GitHubDetailsRepository
-import easy.com.br.easygithubapp.Repository.GitHubRepository
-import easy.com.br.easygithubapp.Repository.impl.GitHubDetailsRepositoryImpl
-import easy.com.br.easygithubapp.Repository.impl.GithubRepositoryImpl
-import retrofit2.Retrofit
-import javax.inject.Singleton
+import easy.com.br.easygithubapp.repository.GitHubDetailsRepository
+import easy.com.br.easygithubapp.repository.GitHubRepository
+import easy.com.br.easygithubapp.repository.impl.GitHubDetailsRepositoryImpl
+import easy.com.br.easygithubapp.repository.impl.GithubRepositoryImpl
 
 @Module
 class GitHubRepositoryModule{

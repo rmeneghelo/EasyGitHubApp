@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.View
+package easy.com.br.easygithubapp.view
 
 import android.content.Intent
 import android.graphics.Color
@@ -11,12 +11,12 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
-import easy.com.br.easygithubapp.Adapters.RepositoriesAdapter
-import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
+import easy.com.br.easygithubapp.adapters.RepositoriesAdapter
+import easy.com.br.easygithubapp.application.GetRepositoriesHandler
+import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.R
-import easy.com.br.easygithubapp.di.modules.Components.DaggerGetRepositoriesHandlerComponent
-import easy.com.br.easygithubapp.di.modules.Components.GetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.di.modules.components.GetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import io.reactivex.android.schedulers.AndroidSchedulers

@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.Adapters
+package easy.com.br.easygithubapp.adapters
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDetail
+import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.github_repository_detail_row.view.*
 import java.text.SimpleDateFormat

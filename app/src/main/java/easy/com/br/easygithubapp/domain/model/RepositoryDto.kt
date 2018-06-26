@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.Domain.Model
+package easy.com.br.easygithubapp.domain.model
 
 data class RepositoryDto(
         var totalCount: Int,

@@ -1,17 +1,16 @@
 package easy.com.br.easygithubapp
 
 import com.google.gson.GsonBuilder
-import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
+import easy.com.br.easygithubapp.application.GetRepositoriesHandler
+import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.Model.RepositoriesApiResult
-import easy.com.br.easygithubapp.Repository.GitHubRepository
+import easy.com.br.easygithubapp.repository.GitHubRepository
 import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.observers.TestObserver
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
-import junit.framework.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

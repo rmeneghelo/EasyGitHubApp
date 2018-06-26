@@ -1,8 +1,8 @@
-package easy.com.br.easygithubapp.di.modules.Components
+package easy.com.br.easygithubapp.di.modules.components
 
 import dagger.Component
-import easy.com.br.easygithubapp.Application.GetRepositoriesHandler
-import easy.com.br.easygithubapp.Application.GetRepositoryDetailsHandler
+import easy.com.br.easygithubapp.application.GetRepositoriesHandler
+import easy.com.br.easygithubapp.application.GetRepositoryDetailsHandler
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import javax.inject.Singleton

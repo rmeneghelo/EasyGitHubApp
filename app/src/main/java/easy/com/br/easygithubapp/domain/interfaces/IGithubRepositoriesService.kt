@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.Domain.Interfaces
+package easy.com.br.easygithubapp.domain.interfaces
 
 import easy.com.br.easygithubapp.Model.RepositoriesApiResult
 import io.reactivex.Observable

@@ -1,10 +1,10 @@
-package easy.com.br.easygithubapp.Application
+package easy.com.br.easygithubapp.application
 
-import easy.com.br.easygithubapp.Domain.Model.License
-import easy.com.br.easygithubapp.Domain.Model.Owner
-import easy.com.br.easygithubapp.Domain.Model.Repository
-import easy.com.br.easygithubapp.Domain.Model.RepositoryDto
-import easy.com.br.easygithubapp.Repository.GitHubRepository
+import easy.com.br.easygithubapp.domain.model.License
+import easy.com.br.easygithubapp.domain.model.Owner
+import easy.com.br.easygithubapp.domain.model.Repository
+import easy.com.br.easygithubapp.domain.model.RepositoryDto
+import easy.com.br.easygithubapp.repository.GitHubRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
