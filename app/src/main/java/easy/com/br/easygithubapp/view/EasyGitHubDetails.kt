@@ -38,7 +38,7 @@ class EasyGitHubDetails: AppCompatActivity(){
                                      username: String,
                                      repositoryName: String){
 
-        handler.GetRepositoryDetails(username, repositoryName)
+        handler.getRepositoryDetails(username, repositoryName)
 
         handler
                 .repositoryDetailsResult

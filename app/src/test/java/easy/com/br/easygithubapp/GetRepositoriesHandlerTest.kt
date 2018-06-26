@@ -45,7 +45,7 @@ class GetRepositoriesHandlerTest {
     fun addition_isCorrect() {
         Mockito.`when`(repository.getRepositories()).thenReturn(Observable.just(apiResult))
 
-        getRepositoriesHandler.GetRepositories()
+        getRepositoriesHandler.getRepositories()
 
         val testObserver = TestObserver<RepositoryDto>()
 

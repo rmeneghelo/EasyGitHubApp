@@ -16,7 +16,7 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
     private val repositoriesResultPublish = PublishSubject.create<RepositoryDto>()
     val repositoriesResult: Observable<RepositoryDto> get() = repositoriesResultPublish
 
-    fun GetRepositories() {
+    fun getRepositories() {
         repository
                 .getRepositories()
                 .subscribeOn(Schedulers.io())
@@ -28,13 +28,13 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                                 Repository(repoResult.githubRepositoryName,
                                         repoResult.description,
                                         Owner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
-                                        CheckApacheLicense(repoResult.license?.licenseKey),
+                                        checkApacheLicense(repoResult.license?.licenseKey),
                                         repoResult.starsNumber,
                                         repoResult.forksNumber,
                                         repoResult.openIssuesNumber)
                             }
 
-                            repositoriesResultPublish.onNext(RepositoryDto(result.total_count, CheckOpenIssuesMoreThanHundred(repositoriesList), repositoriesList))
+                            repositoriesResultPublish.onNext(RepositoryDto(result.total_count, checkOpenIssuesMoreThanHundred(repositoriesList), repositoriesList))
                             repositoriesResultPublish.onComplete()
                         },
                         {
@@ -44,11 +44,11 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                 )
     }
 
-    private fun CheckOpenIssuesMoreThanHundred(repositoriesList: List<Repository>): Int {
+    private fun checkOpenIssuesMoreThanHundred(repositoriesList: List<Repository>): Int {
         return repositoriesList.count { repository -> repository.openIssuesNumber > 100 }
     }
 
-    private fun CheckApacheLicense(key: String): License {
+    private fun checkApacheLicense(key: String): License {
         var isApache = false
         if(!key.isNullOrEmpty() && key.contains("Apache", true)) {
             isApache = true

@@ -14,7 +14,7 @@ class GetRepositoryDetailsHandler @Inject constructor(private val repository: Gi
     private val repositoryDetailsResultPublish = PublishSubject.create<List<RepositoryDetail>>()
     val repositoryDetailsResult: Observable<List<RepositoryDetail>> get() = repositoryDetailsResultPublish
 
-    fun GetRepositoryDetails(username: String, repositoryName: String) {
+    fun getRepositoryDetails(username: String, repositoryName: String) {
         repository
                 .getRepositoryDetails(username, repositoryName)
                 .subscribeOn(Schedulers.io())

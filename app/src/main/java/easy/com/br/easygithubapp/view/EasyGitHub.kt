@@ -61,7 +61,7 @@ class EasyGitHub : AppCompatActivity() {
     }
 
     private fun GetRepositories(handler: GetRepositoriesHandler){
-        handler.GetRepositories()
+        handler.getRepositories()
 
         handler
                 .repositoriesResult
