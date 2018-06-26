@@ -9,7 +9,7 @@ import easy.com.br.easygithubapp.repository.GitHubRepository
 class GetRepositoriesHandlerModule {
 
     @Provides
-    fun provideGetRepsitoriesHandlerModule(gitHubRepository: GitHubRepository): GetRepositoriesHandler {
+    fun provideGetRepositoriesHandlerModule(gitHubRepository: GitHubRepository): GetRepositoriesHandler {
         return GetRepositoriesHandler(gitHubRepository)
     }
 }
