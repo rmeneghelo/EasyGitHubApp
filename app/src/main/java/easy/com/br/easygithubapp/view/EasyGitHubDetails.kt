@@ -31,10 +31,10 @@ class EasyGitHubDetails: AppCompatActivity(){
 
         val handler : GetRepositoryDetailsHandler = component.getRepositoryDetailsHandler()
 
-        GetRepositoryDetails(handler, intent.getStringExtra("authorName"), intent.getStringExtra("repositoryName"))
+        getRepositoryDetails(handler, intent.getStringExtra("authorName"), intent.getStringExtra("repositoryName"))
     }
 
-    private fun GetRepositoryDetails(handler: GetRepositoryDetailsHandler,
+    private fun getRepositoryDetails(handler: GetRepositoryDetailsHandler,
                                      username: String,
                                      repositoryName: String){
 
@@ -48,7 +48,7 @@ class EasyGitHubDetails: AppCompatActivity(){
                         {
                             result ->
                             Log.d("repository Details view", result.size.toString())
-                            FillingRepositoriesView(result)
+                            fillingRepositoriesView(result)
                         },
                         {
                             e -> Log.d("repository Details erro", e.message)
@@ -59,7 +59,7 @@ class EasyGitHubDetails: AppCompatActivity(){
                 )
     }
 
-    private fun FillingRepositoriesView(repositoryDetail: List<RepositoryDetail>){
+    private fun fillingRepositoriesView(repositoryDetail: List<RepositoryDetail>){
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repository_detail_recycler_view.layoutManager = mLayoutManager
         repository_detail_recycler_view.itemAnimator = DefaultItemAnimator()

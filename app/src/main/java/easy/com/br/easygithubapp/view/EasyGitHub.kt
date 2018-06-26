@@ -38,15 +38,15 @@ class EasyGitHub : AppCompatActivity() {
 
         val handler : GetRepositoriesHandler = component.getRepositoriesHandler()
 
-        GetRepositories(handler)
+        getRepositories(handler)
 
         swipeRefresh.setOnRefreshListener {
-            GetRepositories(handler)
+            getRepositories(handler)
             onItemsLoadComplete()
         }
     }
 
-    private fun FillingRepositoriesView(repository: RepositoryDto){
+    private fun fillingRepositoriesView(repository: RepositoryDto){
         val mLayoutManager = LinearLayoutManager(applicationContext)
         repositories_recycler_view.layoutManager = mLayoutManager
         repositories_recycler_view.itemAnimator = DefaultItemAnimator()
@@ -60,7 +60,7 @@ class EasyGitHub : AppCompatActivity() {
         }
     }
 
-    private fun GetRepositories(handler: GetRepositoriesHandler){
+    private fun getRepositories(handler: GetRepositoriesHandler){
         handler.getRepositories()
 
         handler
@@ -71,9 +71,9 @@ class EasyGitHub : AppCompatActivity() {
                         {
                             result ->
                             Log.d("Xuxa tentativa 1", result.listRepositories.size.toString())
-                            FillingRepositoriesView(result)
-                            FillingTotalRepositories(result)
-                            FillingTotalOpenIssues(result)
+                            fillingRepositoriesView(result)
+                            fillingTotalRepositories(result)
+                            fillingTotalOpenIssues(result)
                         },
                         {
                             e -> Log.d("Xuxa tentativa erro", e.message)
@@ -84,7 +84,7 @@ class EasyGitHub : AppCompatActivity() {
                 )
     }
 
-    private fun FillingTotalOpenIssues(result: RepositoryDto?) {
+    private fun fillingTotalOpenIssues(result: RepositoryDto?) {
         tvTotalIssues.text = "Repositories with more than 100 open issues: "
         val totalCount = SpannableString(result?.openIssuesMoreThanHundred.toString())
 
@@ -92,7 +92,7 @@ class EasyGitHub : AppCompatActivity() {
         tvTotalIssues.append(totalCount)
     }
 
-    private fun FillingTotalRepositories(result: RepositoryDto?) {
+    private fun fillingTotalRepositories(result: RepositoryDto?) {
         tvTotal.text = "Total of repositories: "
         val totalCount = SpannableString(result?.totalCount.toString())
 
@@ -100,7 +100,7 @@ class EasyGitHub : AppCompatActivity() {
         tvTotal.append(totalCount)
     }
 
-    fun onItemsLoadComplete() {
+    private fun onItemsLoadComplete() {
         swipeRefresh.isRefreshing = false
     }
 }
