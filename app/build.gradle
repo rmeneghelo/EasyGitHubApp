@@ -22,6 +22,19 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    flavorDimensions "default"
+    productFlavors {
+        regular {
+        }
+        demo {
+            applicationIdSuffix = ".demo"
+        }
+        winter {
+            applicationId "easy.com.br.easygithubapp.premium"
+            versionCode 1
+            versionName "1.0.1"
+        }
+    }
 }
 
 dependencies {
