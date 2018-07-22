@@ -12,7 +12,7 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.util.Log
 import easy.com.br.easygithubapp.adapters.RepositoriesAdapter
-import easy.com.br.easygithubapp.application.GetRepositoriesHandler
+import easy.com.br.easygithubapp.viewModel.GetRepositoriesHandler
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoriesHandlerComponent

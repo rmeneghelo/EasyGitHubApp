@@ -7,7 +7,7 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import easy.com.br.easygithubapp.adapters.RepositoryDetailsAdapter
-import easy.com.br.easygithubapp.application.GetRepositoryDetailsHandler
+import easy.com.br.easygithubapp.viewModel.GetRepositoryDetailsHandler
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoryDetailsHandlerComponent

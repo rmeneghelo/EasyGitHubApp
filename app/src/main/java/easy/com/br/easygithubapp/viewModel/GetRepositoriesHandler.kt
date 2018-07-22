@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.application
+package easy.com.br.easygithubapp.viewModel
 
 import easy.com.br.easygithubapp.domain.model.License
 import easy.com.br.easygithubapp.domain.model.Owner
