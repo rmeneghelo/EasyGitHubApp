@@ -19,7 +19,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:textColor="@color/githubRepositoryName"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

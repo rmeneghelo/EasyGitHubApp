@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/githubRepositoryDetailPRTitle"
         android:textStyle="bold"
-        android:textSize="16dp"/>
+        android:textSize="16sp"/>
 
     <TextView
         android:id="@+id/tvPullRequestCreationDate"
