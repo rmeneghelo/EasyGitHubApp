@@ -70,16 +70,16 @@ class EasyGitHub : AppCompatActivity() {
                 .subscribe(
                         {
                             result ->
-                            Log.d("Xuxa tentativa 1", result.listRepositories.size.toString())
+                            Log.d("Result size: ", result.listRepositories.size.toString())
                             fillingRepositoriesView(result)
                             fillingTotalRepositories(result)
                             fillingTotalOpenIssues(result)
                         },
                         {
-                            e -> Log.d("Xuxa tentativa erro", e.message)
+                            e -> Log.d("Error:", e.message)
                         },
                         {
-                            repositories_recycler_view.adapter.notifyDataSetChanged()
+                            repositories_recycler_view.adapter?.notifyDataSetChanged()
                         }
                 )
     }
