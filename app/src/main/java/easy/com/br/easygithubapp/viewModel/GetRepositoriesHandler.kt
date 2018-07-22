@@ -47,7 +47,7 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
 
     private fun checkApacheLicense(key: String): RepositoryLicense {
         var isApache = false
-        if(!key.isNullOrEmpty() && key.contains("Apache", true)) {
+        if(!key.isEmpty() && key.contains("Apache", true)) {
             isApache = true
         }
 
