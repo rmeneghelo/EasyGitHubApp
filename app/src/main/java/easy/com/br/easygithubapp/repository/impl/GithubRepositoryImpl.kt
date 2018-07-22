@@ -1,7 +1,7 @@
 package easy.com.br.easygithubapp.repository.impl
 
 import easy.com.br.easygithubapp.domain.interfaces.IGithubRepositoriesService
-import easy.com.br.easygithubapp.Model.RepositoriesApiResult
+import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import io.reactivex.Observable
 import retrofit2.Retrofit

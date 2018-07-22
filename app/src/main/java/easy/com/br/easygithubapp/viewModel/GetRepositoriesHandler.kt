@@ -1,9 +1,6 @@
 package easy.com.br.easygithubapp.viewModel
 
-import easy.com.br.easygithubapp.domain.model.License
-import easy.com.br.easygithubapp.domain.model.Owner
-import easy.com.br.easygithubapp.domain.model.Repository
-import easy.com.br.easygithubapp.domain.model.RepositoryDto
+import easy.com.br.easygithubapp.domain.model.*
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,10 +21,10 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                 .subscribe(
                         {
                             result ->
-                            var repositoriesList: List<Repository> = result.items.map { repoResult ->
-                                Repository(repoResult.githubRepositoryName,
+                            var repositoriesList: List<UserRepository> = result.items.map { repoResult ->
+                                UserRepository(repoResult.githubRepositoryName,
                                         repoResult.description,
-                                        Owner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
+                                        RepositoryOwner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
                                         checkApacheLicense(repoResult.license?.licenseKey),
                                         repoResult.starsNumber,
                                         repoResult.forksNumber,
@@ -44,17 +41,17 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                 )
     }
 
-    private fun checkOpenIssuesMoreThanHundred(repositoriesList: List<Repository>): Int {
+    private fun checkOpenIssuesMoreThanHundred(repositoriesList: List<UserRepository>): Int {
         return repositoriesList.count { repository -> repository.openIssuesNumber > 100 }
     }
 
-    private fun checkApacheLicense(key: String): License {
+    private fun checkApacheLicense(key: String): RepositoryLicense {
         var isApache = false
         if(!key.isNullOrEmpty() && key.contains("Apache", true)) {
             isApache = true
         }
 
-        return License(isApache)
+        return RepositoryLicense(isApache)
     }
 
 }

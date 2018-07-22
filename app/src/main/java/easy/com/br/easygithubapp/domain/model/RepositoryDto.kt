@@ -3,22 +3,22 @@ package easy.com.br.easygithubapp.domain.model
 data class RepositoryDto(
         var totalCount: Int,
         var openIssuesMoreThanHundred: Int,
-        var listRepositories: List<Repository>
+        var listRepositories: List<UserRepository>
         )
 
-data class Repository(var githubRepositoryName: String,
+data class UserRepository(var githubRepositoryName: String,
                       var description: String,
-                      var owner: Owner,
-                      var license: License,
+                      var owner: RepositoryOwner,
+                      var license: RepositoryLicense,
                       var starsNumber: Int,
                       var forksNumber: Int,
                       var openIssuesNumber: Int)
 
-data class Owner(
+data class RepositoryOwner(
         var authorName: String,
         var authorPhoto: String
 )
 
-data class License(
+data class RepositoryLicense(
         var isApacheLicense: Boolean
 )

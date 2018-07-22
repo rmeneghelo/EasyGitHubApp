@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.Model
+package easy.com.br.easygithubapp.domain.model
 
 import com.google.gson.annotations.SerializedName
 

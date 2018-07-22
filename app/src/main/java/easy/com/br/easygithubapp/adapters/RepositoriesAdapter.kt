@@ -8,14 +8,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
-import easy.com.br.easygithubapp.domain.model.Repository
 import easy.com.br.easygithubapp.R
+import easy.com.br.easygithubapp.domain.model.UserRepository
 import kotlinx.android.synthetic.main.github_repository_row.view.*
 
-class RepositoriesAdapter(items: List<Repository>?, private val clickListener: (Repository) -> Unit)
+class RepositoriesAdapter(items: List<UserRepository>?, private val clickListener: (UserRepository) -> Unit)
     : RecyclerView.Adapter<RepositoriesAdapter.MyViewHolder>() {
 
-    private var repositoriesList: List<Repository>? = items
+    private var repositoriesList: List<UserRepository>? = items
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var githubRepositoryName: TextView = view.githubRepositoryName
