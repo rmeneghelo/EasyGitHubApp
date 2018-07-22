@@ -8,7 +8,6 @@
     <color name="githubRepositoryForksNumber">#898400</color>
     <color name="githubRepositoryStarsNumber">#898400</color>
     <color name="githubRepositoryAuthorName">#4c65ff</color>
-    <color name="githubRepositoryAuthorPhoto">#4c65ff</color>
     <color name="githubRepositoryTotal">#dbdbdb</color>
     <color name="githubRepositoryDetailPRTitle">#4b60e4</color>
     <color name="githubRepositoryDetailPRCreationDate">#a15555</color>
