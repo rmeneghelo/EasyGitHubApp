@@ -11,6 +11,7 @@ import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.R
 import kotlinx.android.synthetic.main.github_repository_detail_row.view.*
 import java.text.SimpleDateFormat
+import java.util.*
 
 class RepositoryDetailsAdapter (items: List<RepositoryDetail>?)
     : RecyclerView.Adapter<RepositoryDetailsAdapter.MyViewHolder>() {
@@ -36,7 +37,7 @@ class RepositoryDetailsAdapter (items: List<RepositoryDetail>?)
         val repositoryDetail = repositoryDetailsList?.get(position)
 
         holder.pullRequestTitle.text = repositoryDetail?.pullRequestTitle
-        holder.pullRequestCreationDate.text =  SimpleDateFormat("dd/MM/yyyy").format(repositoryDetail?.pullRequestCreationDate)
+        holder.pullRequestCreationDate.text =  SimpleDateFormat("yyyy-MM-dd", Locale.US).format(repositoryDetail?.pullRequestCreationDate)
         holder.pullRequestBody.text = repositoryDetail?.pullRequestBody
         holder.username.text = repositoryDetail?.user?.username
 
