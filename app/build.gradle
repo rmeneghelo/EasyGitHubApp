@@ -25,10 +25,11 @@ android {
     flavorDimensions "default"
     productFlavors {
         regular {
-
+            buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
         }
         demo {
             applicationIdSuffix = ".demo"
+            buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
         }
     }
 }
