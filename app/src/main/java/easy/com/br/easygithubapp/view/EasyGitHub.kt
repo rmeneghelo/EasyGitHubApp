@@ -85,7 +85,7 @@ class EasyGitHub : AppCompatActivity() {
     }
 
     private fun fillingTotalOpenIssues(result: RepositoryDto?) {
-        tvTotalIssues.text = "Repositories with more than 100 open issues: "
+        tvTotalIssues.text = getString(R.string.totalIssuesText)
         val totalCount = SpannableString(result?.openIssuesMoreThanHundred.toString())
 
         totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -93,7 +93,7 @@ class EasyGitHub : AppCompatActivity() {
     }
 
     private fun fillingTotalRepositories(result: RepositoryDto?) {
-        tvTotal.text = "Total of repositories: "
+        tvTotal.text = getString(R.string.totalOfRepositoriesText)
         val totalCount = SpannableString(result?.totalCount.toString())
 
         totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
