@@ -47,6 +47,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_toRightOf="@id/description"
+        android:contentDescription="@string/authorPhotoDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
@@ -77,6 +78,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_toLeftOf="@id/forksNumber"
+        android:contentDescription="@string/branchForkImageDescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
@@ -99,6 +101,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/favoriteStarImageDescription"
         app:layout_constraintStart_toEndOf="@+id/forksNumber"
         app:layout_constraintTop_toBottomOf="@+id/description" />
 

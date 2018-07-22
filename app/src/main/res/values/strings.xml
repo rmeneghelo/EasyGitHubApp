@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EasyGitHubApp</string>
+    <string name="authorPhotoDescription">Photo of the author</string>
+    <string name="branchForkImageDescription">Branch fork image</string>
+    <string name="favoriteStarImageDescription">Favorite star image</string>
+    <string name="userPhotoDescription">Photo of the user who made the pull request</string>
 </resources>
