@@ -3,7 +3,6 @@ package easy.com.br.easygithubapp
 import com.google.gson.GsonBuilder
 import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
 import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
-import easy.com.br.easygithubapp.domain.model.Repository
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import easy.com.br.easygithubapp.viewModel.GetRepositoriesHandler

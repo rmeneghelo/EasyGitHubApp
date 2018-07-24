@@ -23,7 +23,7 @@ class EasyGitHubDetails: AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easy_git_hub_details)
 
-        var component: GetRepositoryDetailsHandlerComponent = DaggerGetRepositoryDetailsHandlerComponent
+        val component: GetRepositoryDetailsHandlerComponent = DaggerGetRepositoryDetailsHandlerComponent
                 .builder()
                 .gitHubRepositoryModule(GitHubRepositoryModule())
                 .retrofitModule(RetrofitModule())

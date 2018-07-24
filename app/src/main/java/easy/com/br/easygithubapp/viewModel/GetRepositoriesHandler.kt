@@ -21,7 +21,7 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                 .subscribe(
                         {
                             result ->
-                            var repositoriesList: List<UserRepository> = result.items.map { repoResult ->
+                            val repositoriesList: List<UserRepository> = result.items.map { repoResult ->
                                 UserRepository(repoResult.githubRepositoryName,
                                         repoResult.description,
                                         RepositoryOwner(repoResult.owner.authorName, repoResult.owner.authorPhoto),

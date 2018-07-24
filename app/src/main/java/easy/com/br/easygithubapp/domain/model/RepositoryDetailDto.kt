@@ -3,8 +3,6 @@ package easy.com.br.easygithubapp.domain.model
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class RepositoryDetailApiResult(var result: List<RepositoryDetail>)
-
 data class RepositoryDetail(
         @SerializedName("title")
         var pullRequestTitle: String,

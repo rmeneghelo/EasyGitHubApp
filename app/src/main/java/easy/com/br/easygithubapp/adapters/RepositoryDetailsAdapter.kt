@@ -16,7 +16,7 @@ import java.util.*
 class RepositoryDetailsAdapter (items: List<RepositoryDetail>?)
     : RecyclerView.Adapter<RepositoryDetailsAdapter.MyViewHolder>() {
 
-    var repositoryDetailsList: List<RepositoryDetail>? = items
+    private var repositoryDetailsList: List<RepositoryDetail>? = items
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var pullRequestTitle: TextView = view.tvPullRequestTitle

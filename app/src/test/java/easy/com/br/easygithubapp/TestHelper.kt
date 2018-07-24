@@ -3,7 +3,7 @@ package easy.com.br.easygithubapp
 class TestHelper {
 
     companion object {
-        val API_RESPONSE =
+        const val API_RESPONSE =
                 "{ \"total_count\": 4665530,\n" +
                 "    \"incomplete_results\": false,\n" +
                 "    \"items\": [\n" +

@@ -30,7 +30,7 @@ class EasyGitHub : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easy_git_hub)
 
-        var component: GetRepositoriesHandlerComponent = DaggerGetRepositoriesHandlerComponent
+        val component: GetRepositoriesHandlerComponent = DaggerGetRepositoriesHandlerComponent
                 .builder()
                 .gitHubRepositoryModule(GitHubRepositoryModule())
                 .retrofitModule(RetrofitModule())
