@@ -76,7 +76,7 @@ class EasyGitHub : AppCompatActivity() {
                             fillingTotalOpenIssues(result)
                         },
                         {
-                            e -> Log.d("Error:", e.message)
+                            e -> Log.d("Error EasyGitHubApp:", e.message)
                         },
                         {
                             repositories_recycler_view.adapter?.notifyDataSetChanged()
@@ -88,16 +88,20 @@ class EasyGitHub : AppCompatActivity() {
         tvTotalIssues.text = getString(R.string.totalIssuesText)
         val totalCount = SpannableString(result?.openIssuesMoreThanHundred.toString())
 
-        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvTotalIssues.append(totalCount)
+        totalCount?.let {
+            totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, it.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            tvTotalIssues.append(it)
+        }
     }
 
     private fun fillingTotalRepositories(result: RepositoryDto?) {
         tvTotal.text = getString(R.string.totalOfRepositoriesText)
         val totalCount = SpannableString(result?.totalCount.toString())
 
-        totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, totalCount.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        tvTotal.append(totalCount)
+        totalCount?.let {
+            totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, it.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            tvTotal.append(it)
+        }
     }
 
     private fun onItemsLoadComplete() {
