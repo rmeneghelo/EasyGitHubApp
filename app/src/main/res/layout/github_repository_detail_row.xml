@@ -6,25 +6,25 @@
 
     <TextView
         android:id="@+id/tvPullRequestTitle"
-        android:layout_width="198dp"
+        android:layout_width="@dimen/textview_pull_request_title_width"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/textview_pull_request_title_margin_end"
+        android:layout_marginLeft="@dimen/textview_pull_request_title_margin_left"
+        android:layout_marginRight="@dimen/textview_pull_request_title_margin_right"
+        android:layout_marginStart="@dimen/textview_pull_request_title_margin_start"
+        android:layout_marginTop="@dimen/textview_pull_request_title_margin_top"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textColor="@color/githubRepositoryDetailPRTitle"
         android:textStyle="bold"
-        android:textSize="16sp"/>
+        android:textSize="@dimen/textview_pull_request_title_text_size"/>
 
     <TextView
         android:id="@+id/tvPullRequestCreationDate"
-        android:layout_width="198dp"
+        android:layout_width="@dimen/textview_pull_request_date_width"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/textview_pull_request_date_margin_top"
         app:layout_constraintEnd_toEndOf="@+id/tvPullRequestTitle"
         app:layout_constraintStart_toStartOf="@+id/tvPullRequestTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvPullRequestTitle"
@@ -33,9 +33,9 @@
 
     <TextView
         android:id="@+id/tvPullRequestBody"
-        android:layout_width="198dp"
+        android:layout_width="@dimen/textview_pull_request_body_width"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/textview_pull_request_body_margin_top"
         app:layout_constraintEnd_toEndOf="@+id/tvPullRequestCreationDate"
         app:layout_constraintStart_toStartOf="@+id/tvPullRequestCreationDate"
         app:layout_constraintTop_toBottomOf="@+id/tvPullRequestCreationDate" />
@@ -44,7 +44,7 @@
         android:id="@+id/tvUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/textview_pull_request_username_margin_top"
         android:textColor="@color/githubRepositoryDetailPRAuthorName"
         app:layout_constraintEnd_toEndOf="@+id/userPhoto"
         app:layout_constraintStart_toStartOf="@+id/userPhoto"
@@ -52,13 +52,13 @@
 
     <ImageView
         android:id="@+id/userPhoto"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="22dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="@dimen/textview_pull_request_user_photo_width"
+        android:layout_height="@dimen/textview_pull_request_user_photo_height"
+        android:layout_marginEnd="@dimen/textview_pull_request_user_photo_margin_end"
+        android:layout_marginLeft="@dimen/textview_pull_request_user_photo_margin_left"
+        android:layout_marginRight="@dimen/textview_pull_request_user_photo_margin_right"
+        android:layout_marginStart="@dimen/textview_pull_request_user_photo_margin_start"
+        android:layout_marginTop="@dimen/textview_pull_request_user_photo_margin_top"
         android:contentDescription="@string/userPhotoDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
