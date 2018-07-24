@@ -45,7 +45,7 @@ class RepositoryDetailsAdapter (items: List<RepositoryDetail>?)
         {
             Picasso
                     .get()
-                    .load(repositoryDetail?.user?.userPhoto)
+                    .load(repositoryDetail.user.userPhoto)
                     .into(holder.userPhoto)
         }
 

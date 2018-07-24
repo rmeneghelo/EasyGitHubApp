@@ -88,9 +88,9 @@ class EasyGitHub : AppCompatActivity() {
         tvTotalIssues.text = getString(R.string.totalIssuesText)
         val totalCount = SpannableString(result?.openIssuesMoreThanHundred.toString())
 
-        totalCount?.let {
+        totalCount.let {
             totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, it.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tvTotalIssues.append(it)
+            tvTotalIssues.append(" $it")
         }
     }
 
@@ -98,9 +98,9 @@ class EasyGitHub : AppCompatActivity() {
         tvTotal.text = getString(R.string.totalOfRepositoriesText)
         val totalCount = SpannableString(result?.totalCount.toString())
 
-        totalCount?.let {
+        totalCount.let {
             totalCount.setSpan(ForegroundColorSpan(Color.rgb(255,165,0)), 0, it.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tvTotal.append(it)
+            tvTotal.append(" $it")
         }
     }
 

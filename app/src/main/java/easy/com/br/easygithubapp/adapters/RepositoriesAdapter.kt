@@ -37,18 +37,18 @@ class RepositoriesAdapter(items: List<UserRepository>, private val clickListener
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val repository = repositoriesList[position]
-        holder.githubRepositoryName.text = repository?.githubRepositoryName
-        holder.description.text = repository?.description
-        holder.authorName.text = repository?.owner?.authorName
-        holder.starsNumber.text = repository?.starsNumber.toString()
-        holder.forksNumber.text = repository?.forksNumber.toString()
+        holder.githubRepositoryName.text = repository.githubRepositoryName
+        holder.description.text = repository.description
+        holder.authorName.text = repository.owner.authorName
+        holder.starsNumber.text = repository.starsNumber.toString()
+        holder.forksNumber.text = repository.forksNumber.toString()
 
-        repository?.owner?.authorPhoto?.let {
+        repository.owner.authorPhoto.let {
             if (it.isNotEmpty()){
                 Picasso
-                    .get()
-                    .load(repository?.owner?.authorPhoto)
-                    .into(holder.authorPhoto)
+                        .get()
+                        .load(repository.owner.authorPhoto)
+                        .into(holder.authorPhoto)
             }
         }
 
@@ -62,7 +62,7 @@ class RepositoriesAdapter(items: List<UserRepository>, private val clickListener
                 .load(R.drawable.star_repository)
                 .into(holder.starPhoto)
 
-        repository?.license?.let {
+        repository.license.let {
             if(it.isApacheLicense){
                 holder.itemView.setBackgroundColor(Color.LTGRAY)
             }

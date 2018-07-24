@@ -25,7 +25,7 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
                                 UserRepository(repoResult.githubRepositoryName,
                                         repoResult.description,
                                         RepositoryOwner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
-                                        checkApacheLicense(repoResult.license?.licenseKey),
+                                        checkApacheLicense(repoResult.license),
                                         repoResult.starsNumber,
                                         repoResult.forksNumber,
                                         repoResult.openIssuesNumber)
@@ -45,10 +45,13 @@ class GetRepositoriesHandler @Inject constructor(private val repository: GitHubR
         return repositoriesList.count { repository -> repository.openIssuesNumber > 100 }
     }
 
-    private fun checkApacheLicense(key: String): RepositoryLicense {
+    private fun checkApacheLicense(license: License?): RepositoryLicense {
         var isApache = false
-        if(!key.isNullOrEmpty() && key.contains("Apache", true)) {
-            isApache = true
+
+        license?.licenseKey?.let {
+            if(it.contains("Apache", true)) {
+                isApache = true
+            }
         }
 
         return RepositoryLicense(isApache)
