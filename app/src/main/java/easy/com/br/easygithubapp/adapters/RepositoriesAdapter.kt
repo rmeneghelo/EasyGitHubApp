@@ -12,10 +12,10 @@ import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.domain.model.UserRepository
 import kotlinx.android.synthetic.main.github_repository_row.view.*
 
-class RepositoriesAdapter(items: List<UserRepository>?, private val clickListener: (UserRepository) -> Unit)
+class RepositoriesAdapter(items: List<UserRepository>, private val clickListener: (UserRepository) -> Unit)
     : RecyclerView.Adapter<RepositoriesAdapter.MyViewHolder>() {
 
-    private var repositoriesList: List<UserRepository>? = items
+    private var repositoriesList: List<UserRepository> = items
 
     inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var githubRepositoryName: TextView = view.githubRepositoryName
@@ -36,19 +36,22 @@ class RepositoriesAdapter(items: List<UserRepository>?, private val clickListene
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val repository = repositoriesList?.get(position)
+        val repository = repositoriesList[position]
         holder.githubRepositoryName.text = repository?.githubRepositoryName
         holder.description.text = repository?.description
         holder.authorName.text = repository?.owner?.authorName
         holder.starsNumber.text = repository?.starsNumber.toString()
         holder.forksNumber.text = repository?.forksNumber.toString()
-        if(repository?.owner?.authorPhoto!!.isNotEmpty())
-        {
-            Picasso
+
+        repository?.owner?.authorPhoto?.let {
+            if (it.isNotEmpty()){
+                Picasso
                     .get()
                     .load(repository?.owner?.authorPhoto)
                     .into(holder.authorPhoto)
+            }
         }
+
         Picasso
                 .get()
                 .load(R.drawable.repo_fork)
@@ -59,19 +62,21 @@ class RepositoriesAdapter(items: List<UserRepository>?, private val clickListene
                 .load(R.drawable.star_repository)
                 .into(holder.starPhoto)
 
-        if(repository?.license.isApacheLicense){
-            holder.itemView.setBackgroundColor(Color.LTGRAY)
-        }
-        else{
-            holder.itemView.setBackgroundColor(Color.WHITE)
+        repository?.license?.let {
+            if(it.isApacheLicense){
+                holder.itemView.setBackgroundColor(Color.LTGRAY)
+            }
+            else{
+                holder.itemView.setBackgroundColor(Color.WHITE)
+            }
         }
 
-        holder.itemView.setOnClickListener({
+        holder.itemView.setOnClickListener {
             clickListener(repository)
-        })
+        }
     }
 
 
 
-    override fun getItemCount(): Int = repositoriesList!!.size
+    override fun getItemCount(): Int = repositoriesList.size
 }
