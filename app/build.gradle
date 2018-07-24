@@ -21,18 +21,15 @@ android {
         baseline file("lint-baseline.xml")
     }
     buildTypes {
+        debug {
+            applicationIdSuffix = ".dev"
+            resValue "string", "app_name", "@string/app_name_dev"
+            buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
-    flavorDimensions "default"
-    productFlavors {
-        dev {
-            applicationIdSuffix = ".dev"
-            buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
-        }
-        regular {
+            resValue "string", "app_name", "@string/app_name_release"
             buildConfigField("String", "BASE_API_URL", "\"https://api.github.com/\"")
         }
     }
