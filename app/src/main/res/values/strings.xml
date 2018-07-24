@@ -1,6 +1,6 @@
-<resources>
-    <string name="app_name_release">EasyGitHubApp</string>
-    <string name="app_name_dev">dev-EasyGitHubApp</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name_release" tools:keep="@string/app_name_release">EasyGitHubApp</string>
+    <string name="app_name_dev" tools:keep="@string/app_name_dev">dev-EasyGitHubApp</string>
     <string name="authorPhotoDescription">Photo of the author</string>
     <string name="branchForkImageDescription">Branch fork image</string>
     <string name="favoriteStarImageDescription">Favorite star image</string>
