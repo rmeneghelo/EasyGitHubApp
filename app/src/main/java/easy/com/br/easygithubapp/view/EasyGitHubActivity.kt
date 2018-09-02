@@ -17,11 +17,14 @@ import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
+import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoriesAdapter
 import easy.com.br.easygithubapp.viewModel.GetRepositoriesViewModel
 import kotlinx.android.synthetic.main.activity_easy_git_hub.*
 
 class EasyGitHubActivity : AppCompatActivity() {
+
+    private lateinit var repoAdapter : RepositoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,35 +35,46 @@ class EasyGitHubActivity : AppCompatActivity() {
                 .gitHubRepositoryModule(GitHubRepositoryModule())
                 .build()
 
-        val viewModel: GetRepositoriesViewModel = component.getRepositoriesViewModel()
-
-        fillingRepositoriesView()
-
-        viewModel
-                .repositoriesData
-                .observe(this, Observer { it?.let { RepositoriesAdapter::addItems } })
-
-        viewModel.errorData.observe(this, Observer { it?.let { this::setErrorVisibility } })
-
-        viewModel.loadingData.observe(this, Observer { it?.let { this::showLoading } })
-
-        swipeRefresh.setOnRefreshListener(viewModel::onRefresh)
-
-        viewModel.getRepositories()
-    }
-
-    private fun fillingRepositoriesView() {
-        val mLayoutManager = LinearLayoutManager(applicationContext)
-        repositories_recycler_view.layoutManager = mLayoutManager
-        repositories_recycler_view.itemAnimator = DefaultItemAnimator()
-        repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
-        repositories_recycler_view.adapter = RepositoriesAdapter {
+        repoAdapter = RepositoriesAdapter {
             val intent = Intent(this@EasyGitHubActivity, EasyGitHubDetails::class.java)
 
             intent.putExtra("authorName", it.owner.authorName)
             intent.putExtra("repositoryName", it.githubRepositoryName)
             startActivity(intent)
         }
+
+        val viewModel: GetRepositoriesViewModel = component.getRepositoriesViewModel()
+
+        fillingRepositoriesView()
+
+        viewModel
+                .repositoriesData
+                .observe(this, Observer {
+                    fillRepo(it)
+                })
+
+        viewModel.errorData.observe(this, Observer { it?.let { setErrorVisibility(it) } })
+
+        viewModel.loadingData.observe(this, Observer { it?.let { showLoading(it) } })
+
+        swipeRefresh.setOnRefreshListener(viewModel::onRefresh)
+
+        viewModel.getRepositories()
+    }
+
+    private fun fillRepo(list: List<UserRepository>?) {
+        list?.let {
+            repoAdapter.addItems(it)
+        }
+    }
+
+
+    private fun fillingRepositoriesView() {
+        val mLayoutManager = LinearLayoutManager(applicationContext)
+        repositories_recycler_view.layoutManager = mLayoutManager
+        repositories_recycler_view.itemAnimator = DefaultItemAnimator()
+        repositories_recycler_view.addItemDecoration(DividerItemDecoration(this, LinearLayoutManager.VERTICAL))
+        repositories_recycler_view.adapter = repoAdapter
     }
 
     private fun showLoading(isLoading: Boolean) {

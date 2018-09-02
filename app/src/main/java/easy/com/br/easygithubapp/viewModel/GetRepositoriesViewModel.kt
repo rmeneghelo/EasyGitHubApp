@@ -52,7 +52,7 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
     }
 
     private fun updateData(data: List<UserRepository>) {
-        repositoriesData.value = data
+        repositoriesData.postValue(data)
     }
 
     fun onRefresh() {
