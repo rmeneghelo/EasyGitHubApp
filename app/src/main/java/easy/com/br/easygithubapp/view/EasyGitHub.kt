@@ -18,7 +18,7 @@ import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoriesHand
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoriesAdapter
-import easy.com.br.easygithubapp.viewModel.GetRepositoriesHandler
+import easy.com.br.easygithubapp.viewModel.GetRepositoriesViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_easy_git_hub.*
@@ -36,12 +36,12 @@ class EasyGitHub : AppCompatActivity() {
                 .retrofitModule(RetrofitModule())
                 .build()
 
-        val handler : GetRepositoriesHandler = component.getRepositoriesHandler()
+        val viewModel : GetRepositoriesViewModel = component.getRepositoriesHandler()
 
-        getRepositories(handler)
+        getRepositories(viewModel)
 
         swipeRefresh.setOnRefreshListener {
-            getRepositories(handler)
+            getRepositories(viewModel)
             onItemsLoadComplete()
         }
     }
@@ -60,10 +60,10 @@ class EasyGitHub : AppCompatActivity() {
         }
     }
 
-    private fun getRepositories(handler: GetRepositoriesHandler){
-        handler.getRepositories()
+    private fun getRepositories(viewModel: GetRepositoriesViewModel){
+        viewModel.getRepositories()
 
-        handler
+        viewModel
                 .repositoriesResult
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

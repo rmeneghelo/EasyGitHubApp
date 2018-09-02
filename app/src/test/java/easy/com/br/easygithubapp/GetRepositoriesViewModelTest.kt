@@ -5,7 +5,7 @@ import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
 import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.repository.GitHubRepository
-import easy.com.br.easygithubapp.viewModel.GetRepositoriesHandler
+import easy.com.br.easygithubapp.viewModel.GetRepositoriesViewModel
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.observers.TestObserver
@@ -22,13 +22,13 @@ import org.mockito.runners.MockitoJUnitRunner
 import java.util.concurrent.TimeoutException
 
 @RunWith(MockitoJUnitRunner::class)
-class GetRepositoriesHandlerTest {
+class GetRepositoriesViewModelTest {
 
     @Mock
     private lateinit var repository: GitHubRepository
 
     @InjectMocks
-    private lateinit var getRepositoriesHandler: GetRepositoriesHandler
+    private lateinit var getRepositoriesViewModel: GetRepositoriesViewModel
 
 
     private lateinit var apiResult: RepositoriesApiResult
@@ -49,11 +49,11 @@ class GetRepositoriesHandlerTest {
 
         val testObserver = TestObserver<RepositoryDto>()
 
-        getRepositoriesHandler
+        getRepositoriesViewModel
                 .repositoriesResult
                 .subscribe(testObserver)
 
-        getRepositoriesHandler.getRepositories()
+        getRepositoriesViewModel.getRepositories()
 
         testObserver.assertComplete()
         testObserver.assertNoErrors()
@@ -73,11 +73,11 @@ class GetRepositoriesHandlerTest {
 
         val testObserver = TestObserver<RepositoryDto>()
 
-        getRepositoriesHandler
+        getRepositoriesViewModel
                 .repositoriesResult
                 .subscribe(testObserver)
 
-        getRepositoriesHandler.getRepositories()
+        getRepositoriesViewModel.getRepositories()
 
         testObserver.assertComplete()
         testObserver.assertNoErrors()
@@ -94,11 +94,11 @@ class GetRepositoriesHandlerTest {
 
         val testObserver = TestObserver<RepositoryDto>()
 
-        getRepositoriesHandler
+        getRepositoriesViewModel
                 .repositoriesResult
                 .subscribe(testObserver)
 
-        getRepositoriesHandler.getRepositories()
+        getRepositoriesViewModel.getRepositories()
 
         testObserver.assertError(Exception::class.java)
     }
@@ -109,11 +109,11 @@ class GetRepositoriesHandlerTest {
 
         val testObserver = TestObserver<RepositoryDto>()
 
-        getRepositoriesHandler
+        getRepositoriesViewModel
                 .repositoriesResult
                 .subscribe(testObserver)
 
-        getRepositoriesHandler.getRepositories()
+        getRepositoriesViewModel.getRepositories()
 
         testObserver.assertError(TimeoutException::class.java)
     }

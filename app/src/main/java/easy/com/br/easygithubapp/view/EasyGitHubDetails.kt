@@ -13,7 +13,7 @@ import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoryDetail
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoryDetailsHandlerComponent
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoryDetailsAdapter
-import easy.com.br.easygithubapp.viewModel.GetRepositoryDetailsHandler
+import easy.com.br.easygithubapp.viewModel.GetRepositoryDetailsViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_easy_git_hub_details.*
@@ -29,18 +29,18 @@ class EasyGitHubDetails: AppCompatActivity(){
                 .retrofitModule(RetrofitModule())
                 .build()
 
-        val handler : GetRepositoryDetailsHandler = component.getRepositoryDetailsHandler()
+        val viewModel : GetRepositoryDetailsViewModel = component.getRepositoryDetailsHandler()
 
-        getRepositoryDetails(handler, intent.getStringExtra("authorName"), intent.getStringExtra("repositoryName"))
+        getRepositoryDetails(viewModel, intent.getStringExtra("authorName"), intent.getStringExtra("repositoryName"))
     }
 
-    private fun getRepositoryDetails(handler: GetRepositoryDetailsHandler,
+    private fun getRepositoryDetails(viewModel: GetRepositoryDetailsViewModel,
                                      username: String,
                                      repositoryName: String){
 
-        handler.getRepositoryDetails(username, repositoryName)
+        viewModel.getRepositoryDetails(username, repositoryName)
 
-        handler
+        viewModel
                 .repositoryDetailsResult
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

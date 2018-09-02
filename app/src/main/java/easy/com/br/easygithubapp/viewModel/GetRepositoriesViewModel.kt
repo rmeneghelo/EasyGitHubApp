@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
-class GetRepositoriesHandler @Inject constructor(private val repository: GitHubRepository){
+class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository){
 
     private val repositoriesResultPublish = PublishSubject.create<RepositoryDto>()
     val repositoriesResult: Observable<RepositoryDto> get() = repositoriesResultPublish
