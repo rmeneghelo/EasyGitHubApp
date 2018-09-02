@@ -21,7 +21,7 @@ class RepositoryDetailsAdapter(items: List<RepositoryDetail>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: RepositoryDetailsHolder, position: Int) {
         val repositoryDetail = repositoryDetailsList[position]
-        holder?.run { showRepositoryDetails(repositoryDetail) }
+        holder.run { showRepositoryDetails(repositoryDetail) }
     }
 
 }

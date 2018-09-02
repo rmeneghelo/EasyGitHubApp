@@ -10,12 +10,12 @@ import kotlinx.android.synthetic.main.github_repository_detail_row.view.*
 
 class RepositoryDetailsHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun showRepositoryDetails(repositoryDetail: RepositoryDetail): Unit = with(itemView) {
-        tvPullRequestTitle.text = repositoryDetail?.pullRequestTitle
-        tvPullRequestCreationDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(repositoryDetail?.pullRequestCreationDate)
-        tvPullRequestBody.text = repositoryDetail?.pullRequestBody
-        tvUsername.text = repositoryDetail?.user?.username
+        tvPullRequestTitle.text = repositoryDetail.pullRequestTitle
+        tvPullRequestCreationDate.text = SimpleDateFormat("yyyy-MM-dd", Locale.US).format(repositoryDetail.pullRequestCreationDate)
+        tvPullRequestBody.text = repositoryDetail.pullRequestBody
+        tvUsername.text = repositoryDetail.user.username
 
-        repositoryDetail?.user?.userPhoto?.let {
+        repositoryDetail.user.userPhoto.let {
             if (it.isNotEmpty()) {
                 Picasso
                         .get()

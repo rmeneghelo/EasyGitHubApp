@@ -21,7 +21,7 @@ class RepositoriesAdapter(items: List<UserRepository>, private val clickListener
 
     override fun onBindViewHolder(holder: RepositoriesHolder, position: Int) {
         val repository = repositoriesList[position]
-        holder?.run { showRepositories(repository, clickListener) }
+        holder.run { showRepositories(repository, clickListener) }
     }
 
     override fun getItemCount(): Int = repositoriesList.size
