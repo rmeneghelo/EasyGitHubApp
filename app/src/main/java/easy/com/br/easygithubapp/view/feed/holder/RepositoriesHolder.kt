@@ -9,7 +9,6 @@ import easy.com.br.easygithubapp.domain.model.UserRepository
 import kotlinx.android.synthetic.main.github_repository_row.view.*
 
 class RepositoriesHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
     fun showRepositories(userRepository: UserRepository, clickListener: (UserRepository) -> Unit): Unit = with(itemView) {
         githubRepositoryName.text = userRepository.githubRepositoryName
         description.text = userRepository.description
