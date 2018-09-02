@@ -1,40 +1,46 @@
 package easy.com.br.easygithubapp.di.modules
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import easy.com.br.easygithubapp.BuildConfig
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @Module
-class RetrofitModule{
+class RetrofitModule {
+
+    @Provides
+    fun provideBaseUrl(): String = BuildConfig.BASE_API_URL
 
     @Provides
     @Singleton
-    internal fun provideGson(): Gson {
-        val gsonBuilder = GsonBuilder()
-        return gsonBuilder.create()
+    internal fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
+
+    @Provides
+    fun provideLoggingInterceptor() = HttpLoggingInterceptor().apply {
+        level = HttpLoggingInterceptor.Level.BODY
     }
 
     @Provides
     @Singleton
-    internal fun provideOkhttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().build()
-    }
+    internal fun provideOkhttpClient(loggingInterceptor: HttpLoggingInterceptor): OkHttpClient =
+            OkHttpClient.Builder()
+                    .addInterceptor(loggingInterceptor)
+                    .build()
+
 
     @Provides
     @Singleton
-    internal fun provideRetrofitService(gson: Gson, okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl(BuildConfig.BASE_API_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build()
-    }
+    internal fun provideRetrofitService(gson: GsonConverterFactory, okHttpClient: OkHttpClient, baseUrl: String): Retrofit =
+            Retrofit.Builder()
+                    .baseUrl(baseUrl)
+                    .addConverterFactory(gson)
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .client(okHttpClient)
+                    .build()
+
 }
