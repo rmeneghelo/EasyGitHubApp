@@ -7,10 +7,10 @@ import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.view.feed.holder.RepositoriesHolder
 
-class RepositoriesAdapter(items: List<UserRepository>, private val clickListener: (UserRepository) -> Unit)
+class RepositoriesAdapter(private val clickListener: (UserRepository) -> Unit)
     : RecyclerView.Adapter<RepositoriesHolder>() {
 
-    private var repositoriesList: List<UserRepository> = items
+    private val repositoriesList = mutableListOf<UserRepository>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoriesHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -25,4 +25,9 @@ class RepositoriesAdapter(items: List<UserRepository>, private val clickListener
     }
 
     override fun getItemCount(): Int = repositoriesList.size
+
+    fun addItems(newRepositories: List<UserRepository>) {
+        repositoriesList.addAll(newRepositories)
+        notifyDataSetChanged()
+    }
 }

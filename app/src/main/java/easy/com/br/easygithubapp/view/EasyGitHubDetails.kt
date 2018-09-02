@@ -29,7 +29,7 @@ class EasyGitHubDetails: AppCompatActivity(){
                 .retrofitModule(RetrofitModule())
                 .build()
 
-        val viewModel : GetRepositoryDetailsViewModel = component.getRepositoryDetailsHandler()
+        val viewModel : GetRepositoryDetailsViewModel = component.getRepositoryDetailsViewModel()
 
         getRepositoryDetails(viewModel, intent.getStringExtra("authorName"), intent.getStringExtra("repositoryName"))
     }

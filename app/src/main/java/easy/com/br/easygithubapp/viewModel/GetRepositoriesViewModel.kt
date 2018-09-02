@@ -1,44 +1,62 @@
 package easy.com.br.easygithubapp.viewModel
 
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
 import easy.com.br.easygithubapp.domain.model.*
 import easy.com.br.easygithubapp.repository.GitHubRepository
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import javax.inject.Inject
 
-class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository){
+class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel() {
 
-    private val repositoriesResultPublish = PublishSubject.create<RepositoryDto>()
-    val repositoriesResult: Observable<RepositoryDto> get() = repositoriesResultPublish
+    val errorData = MutableLiveData<Boolean>()
+    val loadingData = MutableLiveData<Boolean>()
+    val repositoriesData = MutableLiveData<List<UserRepository>>()
 
     fun getRepositories() {
-        repository
-                .getRepositories()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        {
-                            result ->
-                            val repositoriesList: List<UserRepository> = result.items.map { repoResult ->
-                                UserRepository(repoResult.githubRepositoryName,
-                                        repoResult.description,
-                                        RepositoryOwner(repoResult.owner.authorName, repoResult.owner.authorPhoto),
-                                        checkApacheLicense(repoResult.license),
-                                        repoResult.starsNumber,
-                                        repoResult.forksNumber,
-                                        repoResult.openIssuesNumber)
-                            }
+        repository.getRepositoriesNew(repositoriesCallback())
+    }
 
-                            repositoriesResultPublish.onNext(RepositoryDto(result.total_count, checkOpenIssuesMoreThanHundred(repositoriesList), repositoriesList))
-                            repositoriesResultPublish.onComplete()
-                        },
-                        {
-                            e ->
-                            repositoriesResultPublish.onError(e)
-                        }
-                )
+    private fun repositoriesCallback() = object : Callback<RepositoriesApiResult> {
+        override fun onFailure(call: Call<RepositoriesApiResult>?, t: Throwable?) {
+            loadingData.value = false
+            errorData.value = true
+        }
+
+        override fun onResponse(call: Call<RepositoriesApiResult>?, response: Response<RepositoriesApiResult>?) {
+            loadingData.value = false
+            errorData.value = false
+
+            response?.body()?.run {
+                val result = mapResult(this)
+                updateData(result)
+            }
+        }
+    }
+
+    private fun mapResult(result: RepositoriesApiResult): List<UserRepository> {
+        val userRepository = arrayListOf<UserRepository>()
+        result.items.forEach {
+            userRepository.add(UserRepository(it.githubRepositoryName,
+                    it.description,
+                    RepositoryOwner(it.owner.authorName, it.owner.authorPhoto),
+                    checkApacheLicense(it.license),
+                    it.starsNumber,
+                    it.forksNumber,
+                    it.openIssuesNumber))
+        }
+
+        return userRepository
+    }
+
+    private fun updateData(data: List<UserRepository>) {
+        repositoriesData.value = data
+    }
+
+    fun onRefresh() {
+        getRepositories()
     }
 
     private fun checkOpenIssuesMoreThanHundred(repositoriesList: List<UserRepository>): Int {
@@ -49,7 +67,7 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
         var isApache = false
 
         license?.licenseKey?.let {
-            if(it.contains("Apache", true)) {
+            if (it.contains("Apache", true)) {
                 isApache = true
             }
         }

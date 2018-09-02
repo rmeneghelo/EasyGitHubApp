@@ -48,6 +48,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android"
     implementation "com.google.dagger:dagger:$dagger"
     implementation "com.squareup.picasso:picasso:$picasso"
+    implementation 'android.arch.lifecycle:runtime:1.1.1'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
     kapt "com.google.dagger:dagger-compiler:$dagger"
     testImplementation 'junit:junit:4.12'
     testImplementation  'com.android.support.test:runner:1.0.2'

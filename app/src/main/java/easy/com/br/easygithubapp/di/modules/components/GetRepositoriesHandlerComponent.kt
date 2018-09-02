@@ -10,11 +10,11 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [(GitHubRepositoryModule::class), (RetrofitModule::class)])
 interface GetRepositoriesHandlerComponent{
-    fun getRepositoriesHandler(): GetRepositoriesViewModel
+    fun getRepositoriesViewModel(): GetRepositoriesViewModel
 }
 
 @Singleton
 @Component(modules = [(GitHubRepositoryModule::class), (RetrofitModule::class)])
 interface GetRepositoryDetailsHandlerComponent{
-    fun getRepositoryDetailsHandler(): GetRepositoryDetailsViewModel
+    fun getRepositoryDetailsViewModel(): GetRepositoryDetailsViewModel
 }
