@@ -7,4 +7,6 @@
     <string name="userPhotoDescription">Photo of the user who made the pull request</string>
     <string name="totalIssuesText">Repositories with more than 100 open issues:</string>
     <string name="totalOfRepositoriesText">Total of repositories:</string>
+    <string name="error_getting_repositories">Error getting repositories!</string>
+    <string name="error_getting_repository_pr">Error getting repository PR!</string>
 </resources>

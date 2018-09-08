@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.activity_easy_git_hub.*
 
 class EasyGitHubActivity : AppCompatActivity() {
 
-    private lateinit var repoAdapter : RepositoriesAdapter
+    private lateinit var repoAdapter: RepositoriesAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -82,7 +82,7 @@ class EasyGitHubActivity : AppCompatActivity() {
     }
 
     private fun setErrorVisibility(shouldShow: Boolean) {
-        errorView.visibility = if (shouldShow) View.VISIBLE else View.GONE
+        error_view.visibility = if (shouldShow) View.VISIBLE else View.GONE
         repositories_recycler_view.visibility = if (!shouldShow) View.VISIBLE else View.GONE
     }
 

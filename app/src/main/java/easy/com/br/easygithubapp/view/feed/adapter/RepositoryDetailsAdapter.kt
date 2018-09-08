@@ -7,8 +7,8 @@ import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.view.feed.holder.RepositoryDetailsHolder
 
-class RepositoryDetailsAdapter(items: List<RepositoryDetail>) : RecyclerView.Adapter<RepositoryDetailsHolder>() {
-    private var repositoryDetailsList: List<RepositoryDetail> = items
+class RepositoryDetailsAdapter : RecyclerView.Adapter<RepositoryDetailsHolder>() {
+    private val repositoryDetailsList = mutableListOf<RepositoryDetail>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryDetailsHolder {
         val itemView = LayoutInflater.from(parent.context)
@@ -24,4 +24,8 @@ class RepositoryDetailsAdapter(items: List<RepositoryDetail>) : RecyclerView.Ada
         holder.run { showRepositoryDetails(repositoryDetail) }
     }
 
+    fun addItems(newRepositories: List<RepositoryDetail>) {
+        repositoryDetailsList.addAll(newRepositories)
+        notifyDataSetChanged()
+    }
 }
