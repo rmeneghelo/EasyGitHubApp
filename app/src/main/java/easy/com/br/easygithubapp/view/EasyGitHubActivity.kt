@@ -36,7 +36,7 @@ class EasyGitHubActivity : AppCompatActivity() {
                 .build()
 
         repoAdapter = RepositoriesAdapter {
-            val intent = Intent(this@EasyGitHubActivity, EasyGitHubDetails::class.java)
+            val intent = Intent(this@EasyGitHubActivity, EasyGitHubDetailsActivity::class.java)
 
             intent.putExtra("authorName", it.owner.authorName)
             intent.putExtra("repositoryName", it.githubRepositoryName)
