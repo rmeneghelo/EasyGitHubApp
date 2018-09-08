@@ -16,7 +16,7 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
     val repositoriesData = MutableLiveData<List<UserRepository>>()
 
     fun getRepositories() {
-        repository.getRepositoriesNew(repositoriesCallback())
+        repository.getRepositories(repositoriesCallback())
     }
 
     private fun repositoriesCallback() = object : Callback<RepositoriesApiResult> {

@@ -8,7 +8,7 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class GithubRepositoryImpl @Inject constructor(private val retrofit: Retrofit) : GitHubRepository {
-    override fun getRepositoriesNew(callback: Callback<RepositoriesApiResult>) {
+    override fun getRepositories(callback: Callback<RepositoriesApiResult>) {
         val service = retrofit
                 .create<IGithubRepositoriesService>(IGithubRepositoriesService::class.java)
         service.searchNew().enqueue(callback)
