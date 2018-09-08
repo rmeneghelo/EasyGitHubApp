@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.viewModel
+package easy.com.br.easygithubapp.viewmodel
 
 import android.util.Log
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail

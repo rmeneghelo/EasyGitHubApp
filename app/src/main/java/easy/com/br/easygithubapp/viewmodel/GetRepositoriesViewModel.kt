@@ -1,4 +1,4 @@
-package easy.com.br.easygithubapp.viewModel
+package easy.com.br.easygithubapp.viewmodel
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel

@@ -5,7 +5,7 @@ import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
 import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.repository.GitHubRepository
-import easy.com.br.easygithubapp.viewModel.GetRepositoriesViewModel
+import easy.com.br.easygithubapp.viewmodel.GetRepositoriesViewModel
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.observers.TestObserver

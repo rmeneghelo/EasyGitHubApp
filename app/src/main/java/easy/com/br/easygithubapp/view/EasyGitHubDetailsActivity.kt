@@ -13,7 +13,7 @@ import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoryDetail
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoryDetailsHandlerComponent
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoryDetailsAdapter
-import easy.com.br.easygithubapp.viewModel.GetRepositoryDetailsViewModel
+import easy.com.br.easygithubapp.viewmodel.GetRepositoryDetailsViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_easy_git_hub_details.*

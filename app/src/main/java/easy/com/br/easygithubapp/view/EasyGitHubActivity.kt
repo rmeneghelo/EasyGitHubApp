@@ -19,7 +19,7 @@ import easy.com.br.easygithubapp.di.modules.components.GetRepositoriesHandlerCom
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoriesAdapter
-import easy.com.br.easygithubapp.viewModel.GetRepositoriesViewModel
+import easy.com.br.easygithubapp.viewmodel.GetRepositoriesViewModel
 import kotlinx.android.synthetic.main.activity_easy_git_hub.*
 
 class EasyGitHubActivity : AppCompatActivity() {
