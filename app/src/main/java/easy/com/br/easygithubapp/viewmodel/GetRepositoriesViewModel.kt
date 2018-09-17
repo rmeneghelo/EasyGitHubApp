@@ -9,30 +9,28 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel() {
+class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel(), Callback<RepositoriesApiResult> {
 
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
     val repositoriesData = MutableLiveData<List<UserRepository>>()
 
     fun getRepositories() {
-        repository.getRepositories(repositoriesCallback())
+        repository.getRepositories(this)
     }
 
-    private fun repositoriesCallback() = object : Callback<RepositoriesApiResult> {
-        override fun onFailure(call: Call<RepositoriesApiResult>?, t: Throwable?) {
-            loadingData.value = false
-            errorData.value = true
-        }
+    override fun onFailure(call: Call<RepositoriesApiResult>?, t: Throwable?) {
+        loadingData.value = false
+        errorData.value = true
+    }
 
-        override fun onResponse(call: Call<RepositoriesApiResult>?, response: Response<RepositoriesApiResult>?) {
-            loadingData.value = false
-            errorData.value = false
+    override fun onResponse(call: Call<RepositoriesApiResult>?, response: Response<RepositoriesApiResult>?) {
+        loadingData.value = false
+        errorData.value = false
 
-            response?.body()?.run {
-                val result = mapResult(this)
-                updateData(result)
-            }
+        response?.body()?.run {
+            val result = mapResult(this)
+            updateData(result)
         }
     }
 
