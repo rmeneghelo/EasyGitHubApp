@@ -1,10 +1,11 @@
 package easy.com.br.easygithubapp
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
+import android.arch.lifecycle.Observer
 import com.google.gson.GsonBuilder
 import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
 import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
-import easy.com.br.easygithubapp.repository.GitHubRepository
+import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.viewmodel.GetRepositoriesViewModel
 import org.junit.Before
 import org.junit.Rule
@@ -16,18 +17,15 @@ import org.mockito.junit.MockitoJUnitRunner
 import retrofit2.Call
 import retrofit2.Response
 
-
 @RunWith(MockitoJUnitRunner::class)
 class GetRepositoriesViewModelTest {
-
-    @Mock
-    private lateinit var repository: GitHubRepository
-
     @InjectMocks
     private lateinit var getRepositoriesViewModel: GetRepositoriesViewModel
 
     @Mock
     private lateinit var call: Call<RepositoriesApiResult>
+
+    @Mock lateinit var observer: Observer<List<UserRepository>>
 
     private lateinit var apiResult: RepositoriesApiResult
 
@@ -42,7 +40,13 @@ class GetRepositoriesViewModelTest {
 
     @Test
     fun `when repositories are requested, call getRepositories and return repositoriesDto`() {
+        getRepositoriesViewModel.repositoriesData.observeForever(observer)
+
         getRepositoriesViewModel.onResponse(call, Response.success(apiResult))
+
+        val result = getRepositoriesViewModel.repositoriesData.value?.get(0)?.description?.isNotEmpty() ?: false
+
+        assert(result)
     }
 
 //    @Test
