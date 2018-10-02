@@ -1,56 +1,41 @@
 package easy.com.br.easygithubapp.viewmodel
 
+import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import easy.com.br.easygithubapp.domain.model.*
 import easy.com.br.easygithubapp.repository.GitHubRepository
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import javax.inject.Inject
 
-class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel(), Callback<RepositoriesApiResult> {
+
+class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel() {
 
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
-    val repositoriesData = MutableLiveData<List<UserRepository>>()
+    var apiResultData = MutableLiveData<RepositoriesApiResult>()
+    val repositoriesData: LiveData<List<UserRepository>> = Transformations.map(apiResultData) { result -> mapResult(result) }
 
     fun getRepositories() {
-        repository.getRepositories(this)
-    }
-
-    override fun onFailure(call: Call<RepositoriesApiResult>?, t: Throwable?) {
-        loadingData.value = false
-        errorData.value = true
-    }
-
-    override fun onResponse(call: Call<RepositoriesApiResult>?, response: Response<RepositoriesApiResult>?) {
-        loadingData.value = false
-        errorData.value = false
-
-        response?.body()?.run {
-            val result = mapResult(this)
-            updateData(result)
-        }
+        apiResultData = repository.getRepositories()
     }
 
     private fun mapResult(result: RepositoriesApiResult): List<UserRepository> {
-        val userRepository = arrayListOf<UserRepository>()
-        result.items.forEach {
-            userRepository.add(UserRepository(it.githubRepositoryName,
-                    it.description,
-                    RepositoryOwner(it.owner.authorName, it.owner.authorPhoto),
-                    checkApacheLicense(it.license),
-                    it.starsNumber,
-                    it.forksNumber,
-                    it.openIssuesNumber))
+        val userRepository = mutableListOf<UserRepository>()
+
+        result.let {
+            it.items.forEach {
+                userRepository.add(UserRepository(it.githubRepositoryName,
+                        it.description,
+                        RepositoryOwner(it.owner.authorName, it.owner.authorPhoto),
+                        checkApacheLicense(it.license),
+                        it.starsNumber,
+                        it.forksNumber,
+                        it.openIssuesNumber))
+            }
         }
 
         return userRepository
-    }
-
-    private fun updateData(data: List<UserRepository>) {
-        repositoriesData.postValue(data)
     }
 
     fun onRefresh() {

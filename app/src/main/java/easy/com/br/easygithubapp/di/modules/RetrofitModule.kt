@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Module
 class RetrofitModule {
 
+    @Singleton
     @Provides
     fun provideBaseUrl(): String = BuildConfig.BASE_API_URL
 
@@ -20,6 +21,7 @@ class RetrofitModule {
     internal fun provideGsonConverter(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
+    @Singleton
     fun provideLoggingInterceptor() = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
