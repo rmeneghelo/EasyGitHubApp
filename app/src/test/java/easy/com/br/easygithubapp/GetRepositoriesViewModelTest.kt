@@ -53,13 +53,13 @@ class GetRepositoriesViewModelTest {
         whenever(repository.getRepositories())
                 .thenReturn(repoResult)
 
-        getRepositoriesViewModel.repositoriesData2.observeForever(observer)
+        getRepositoriesViewModel.repositoriesData.observeForever(observer)
 
         getRepositoriesViewModel.getRepositories()
 
         repoResult.value = apiResult
 
-        getRepositoriesViewModel.repositoriesData2.value.let {
+        getRepositoriesViewModel.repositoriesData.value.let {
             val result = it?.get(0)
             assert(result?.owner?.authorName.isNullOrBlank().not())
         }
