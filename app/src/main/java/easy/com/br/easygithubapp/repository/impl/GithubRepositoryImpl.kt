@@ -11,15 +11,13 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class GithubRepositoryImpl @Inject constructor(private val retrofit: Retrofit) : GitHubRepository {
-    private var result =  MutableLiveData<RepositoriesApiResult>()
-
-    override fun getRepositories(): MutableLiveData<RepositoriesApiResult> {
+    override fun getRepositories(result: MutableLiveData<RepositoriesApiResult>) {
         val service = retrofit
                 .create<IGithubRepositoriesService>(IGithubRepositoriesService::class.java)
-        service.searchNew().enqueue(object : Callback<RepositoriesApiResult> {
+        service.search().enqueue(object : Callback<RepositoriesApiResult> {
             override fun onResponse(call: Call<RepositoriesApiResult>?, response: Response<RepositoriesApiResult>?) {
                 response?.body()?.let {
-                    result.postValue(it)
+                    result.value = it
                 }
             }
 
@@ -28,7 +26,5 @@ class GithubRepositoryImpl @Inject constructor(private val retrofit: Retrofit) :
             }
 
         })
-
-        return result
     }
 }

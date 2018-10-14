@@ -1,10 +1,9 @@
 package easy.com.br.easygithubapp.repository
 
+import android.arch.lifecycle.LiveData
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
-import retrofit2.Callback
+import easy.com.br.easygithubapp.domain.model.UserRepositoryDetail
 
 interface GitHubDetailsRepository {
-    fun getRepositoryDetails(username: String,
-                             repositoryName: String,
-                             call: Callback<List<RepositoryDetail>>)
+    fun getRepositoryDetails(userRepositoryDetail: UserRepositoryDetail): LiveData<List<RepositoryDetail>>
 }

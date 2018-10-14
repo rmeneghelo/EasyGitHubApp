@@ -10,14 +10,17 @@ import javax.inject.Inject
 
 
 class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel() {
-
+    private var apiResultData = MutableLiveData<RepositoriesApiResult>()
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
-    var apiResultData = MutableLiveData<RepositoriesApiResult>()
-    val repositoriesData: LiveData<List<UserRepository>> = Transformations.map(apiResultData) { result -> mapResult(result) }
+    val repositoriesData: LiveData<List<UserRepository>> = Transformations.switchMap(apiResultData) {
+        MutableLiveData<List<UserRepository>>().apply {
+            postValue(mapResult(it))
+        }
+    }
 
     fun getRepositories() {
-        apiResultData = repository.getRepositories()
+         repository.getRepositories(apiResultData)
     }
 
     private fun mapResult(result: RepositoriesApiResult): List<UserRepository> {
