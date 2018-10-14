@@ -11,11 +11,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
+import android.util.Log
 import android.view.View
 import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoriesAdapter
@@ -49,9 +51,7 @@ class EasyGitHubActivity : AppCompatActivity() {
 
         viewModel
                 .repositoriesData
-                .observe(this, Observer {
-                    fillRepo(it)
-                })
+                .observe(this, Observer<List<UserRepository>> { t -> fillRepo(t) })
 
         viewModel.errorData.observe(this, Observer { it?.let { setErrorVisibility(it) } })
 
@@ -61,7 +61,6 @@ class EasyGitHubActivity : AppCompatActivity() {
 
         viewModel.getRepositories()
     }
-
     private fun fillRepo(list: List<UserRepository>?) {
         list?.let {
             repoAdapter.addItems(it)

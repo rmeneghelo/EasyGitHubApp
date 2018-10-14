@@ -13,6 +13,7 @@ import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoryDetailsHandlerComponent
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoryDetailsHandlerComponent
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
+import easy.com.br.easygithubapp.domain.model.UserRepositoryDetail
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoryDetailsAdapter
 import easy.com.br.easygithubapp.viewmodel.GetRepositoryDetailsViewModel
 import kotlinx.android.synthetic.main.activity_easy_git_hub_details.*
@@ -51,7 +52,7 @@ class EasyGitHubDetailsActivity : AppCompatActivity() {
                                      username: String,
                                      repositoryName: String) {
 
-        viewModel.getRepositoryDetails(username, repositoryName)
+        viewModel.getRepositoryDetails(UserRepositoryDetail(username, repositoryName))
     }
 
     private fun fillingRepositoriesView() {
