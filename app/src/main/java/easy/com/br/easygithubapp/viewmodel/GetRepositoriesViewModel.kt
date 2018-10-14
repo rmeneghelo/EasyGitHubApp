@@ -8,19 +8,22 @@ import easy.com.br.easygithubapp.domain.model.*
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import javax.inject.Inject
 
-
 class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel() {
-    private var apiResultData = MutableLiveData<RepositoriesApiResult>()
+    private var apiResultData = MutableLiveData<String>()
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
-    val repositoriesData: LiveData<List<UserRepository>> = Transformations.switchMap(apiResultData) {
+    private val repositoriesData: LiveData<RepositoriesApiResult> = Transformations.switchMap(apiResultData) {
+        repository.getRepositories()
+    }
+
+    val repositoriesData2: LiveData<List<UserRepository>> = Transformations.switchMap(repositoriesData) {
         MutableLiveData<List<UserRepository>>().apply {
             postValue(mapResult(it))
         }
     }
 
     fun getRepositories() {
-         repository.getRepositories(apiResultData)
+        apiResultData.value = ""
     }
 
     private fun mapResult(result: RepositoriesApiResult): List<UserRepository> {
