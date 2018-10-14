@@ -12,13 +12,17 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
     private var apiResultData = MutableLiveData<String>()
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
-    private val repositoriesData: LiveData<RepositoriesApiResult> = Transformations.switchMap(apiResultData) {
-        repository.getRepositories()
+    private val repositoriesApiResultData: LiveData<RepositoriesApiResult> = Transformations.switchMap(apiResultData) {
+        repository.getRepositories().apply {
+            loadingData.value = true
+        }
     }
 
-    val repositoriesData2: LiveData<List<UserRepository>> = Transformations.switchMap(repositoriesData) {
+    val repositoriesData: LiveData<List<UserRepository>> = Transformations.switchMap(repositoriesApiResultData) {
         MutableLiveData<List<UserRepository>>().apply {
-            postValue(mapResult(it))
+            postValue(mapResult(it)).apply {
+                loadingData.value = false
+            }
         }
     }
 

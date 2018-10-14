@@ -50,7 +50,7 @@ class EasyGitHubActivity : AppCompatActivity() {
         fillingRepositoriesView()
 
         viewModel
-                .repositoriesData2
+                .repositoriesData
                 .observe(this, Observer<List<UserRepository>> { t -> fillRepo(t) })
 
         viewModel.errorData.observe(this, Observer { it?.let { setErrorVisibility(it) } })
