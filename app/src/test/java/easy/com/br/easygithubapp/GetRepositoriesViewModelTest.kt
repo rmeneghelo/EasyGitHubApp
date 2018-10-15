@@ -8,7 +8,9 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
 import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
+import easy.com.br.easygithubapp.domain.model.Result
 import easy.com.br.easygithubapp.domain.model.UserRepository
+import easy.com.br.easygithubapp.domain.model.ValueResult
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import easy.com.br.easygithubapp.viewmodel.GetRepositoriesViewModel
 import org.junit.Before
@@ -42,7 +44,7 @@ class GetRepositoriesViewModelTest {
     @Test
     fun `when repositories are requested, call getRepositories and return repositoriesDto`() {
 
-        val repoResult = MutableLiveData<RepositoriesApiResult>()
+        val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
 
         val observer: Observer<List<UserRepository>> = mock()
 
@@ -53,7 +55,7 @@ class GetRepositoriesViewModelTest {
 
         getRepositoriesViewModel.getRepositories()
 
-        repoResult.value = apiResult
+        repoResult.value = ValueResult(apiResult)
 
         getRepositoriesViewModel.repositoriesData.value.let {
             assert(it?.size == 2)
@@ -66,7 +68,7 @@ class GetRepositoriesViewModelTest {
     @Test
     fun `when repositories are requested, should set loading false`() {
 
-        val repoResult = MutableLiveData<RepositoriesApiResult>()
+        val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
 
         val observer: Observer<List<UserRepository>> = mock()
 
@@ -80,7 +82,7 @@ class GetRepositoriesViewModelTest {
 
         getRepositoriesViewModel.getRepositories()
 
-        repoResult.value = apiResult
+        repoResult.value = ValueResult(apiResult)
 
         assert(getRepositoriesViewModel.loadingData.value == false)
     }
