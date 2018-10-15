@@ -7,10 +7,7 @@ import com.google.gson.GsonBuilder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
-import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
-import easy.com.br.easygithubapp.domain.model.Result
-import easy.com.br.easygithubapp.domain.model.UserRepository
-import easy.com.br.easygithubapp.domain.model.ValueResult
+import easy.com.br.easygithubapp.domain.model.*
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import easy.com.br.easygithubapp.viewmodel.GetRepositoriesViewModel
 import org.junit.Before
@@ -66,7 +63,7 @@ class GetRepositoriesViewModelTest {
     }
 
     @Test
-    fun `when repositories are requested, should set loading false`() {
+    fun `when repositories are requested, should set loading to false`() {
 
         val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
 
@@ -83,6 +80,50 @@ class GetRepositoriesViewModelTest {
         getRepositoriesViewModel.getRepositories()
 
         repoResult.value = ValueResult(apiResult)
+
+        assert(getRepositoriesViewModel.loadingData.value == false)
+    }
+
+    @Test
+    fun `when repositories are requested and fails, should set error data to true`() {
+
+        val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
+
+        val observer: Observer<List<UserRepository>> = mock()
+
+        val observerLoading: Observer<Boolean> = mock()
+
+        whenever(repository.getRepositories())
+                .thenReturn(repoResult)
+
+        getRepositoriesViewModel.repositoriesData.observeForever(observer)
+        getRepositoriesViewModel.errorData.observeForever(observerLoading)
+
+        getRepositoriesViewModel.getRepositories()
+
+        repoResult.value = ErrorResult("error")
+
+        assert(getRepositoriesViewModel.errorData.value == true)
+    }
+
+    @Test
+    fun `when repositories are requested and fails, should set loading to false`() {
+
+        val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
+
+        val observer: Observer<List<UserRepository>> = mock()
+
+        val observerLoading: Observer<Boolean> = mock()
+
+        whenever(repository.getRepositories())
+                .thenReturn(repoResult)
+
+        getRepositoriesViewModel.repositoriesData.observeForever(observer)
+        getRepositoriesViewModel.errorData.observeForever(observerLoading)
+
+        getRepositoriesViewModel.getRepositories()
+
+        repoResult.value = ErrorResult("error")
 
         assert(getRepositoriesViewModel.loadingData.value == false)
     }
