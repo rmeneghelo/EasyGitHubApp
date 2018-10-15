@@ -7,5 +7,5 @@ import retrofit2.http.Path
 
 interface IGitHubRepositoryDetailsService {
     @GET("repos/{user}/{repositoryName}/pulls")
-    fun details(@Path("user") user: String, @Path("repositoryName") repositoryName: String): Call<List<RepositoryDetail>>
+    fun details(@Path("user") user: String, @Path("repositoryName") repositoryName: String): Call<MutableList<RepositoryDetail>>
 }

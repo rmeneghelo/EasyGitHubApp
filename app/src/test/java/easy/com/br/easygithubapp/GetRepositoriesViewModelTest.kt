@@ -6,7 +6,7 @@ import android.arch.lifecycle.Observer
 import com.google.gson.GsonBuilder
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE
+import easy.com.br.easygithubapp.TestHelper.Companion.API_RESPONSE_REPOSITORIES
 import easy.com.br.easygithubapp.domain.model.*
 import easy.com.br.easygithubapp.repository.GitHubRepository
 import easy.com.br.easygithubapp.viewmodel.GetRepositoriesViewModel
@@ -35,7 +35,7 @@ class GetRepositoriesViewModelTest {
 
     @Before
     fun setUp(){
-        apiResult = GsonBuilder().create().fromJson(API_RESPONSE, RepositoriesApiResult::class.java)
+        apiResult = GsonBuilder().create().fromJson(API_RESPONSE_REPOSITORIES, RepositoriesApiResult::class.java)
     }
 
     @Test

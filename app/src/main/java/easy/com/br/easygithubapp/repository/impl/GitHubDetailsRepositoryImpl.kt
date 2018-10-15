@@ -13,18 +13,18 @@ import retrofit2.Retrofit
 import javax.inject.Inject
 
 class GitHubDetailsRepositoryImpl @Inject constructor(private val retrofit: Retrofit) : GitHubDetailsRepository {
-    override fun getRepositoryDetails(userRepositoryDetail: UserRepositoryDetail): LiveData<List<RepositoryDetail>> {
-        val result = MutableLiveData<List<RepositoryDetail>>()
+    override fun getRepositoryDetails(userRepositoryDetail: UserRepositoryDetail): LiveData<MutableList<RepositoryDetail>> {
+        val result = MutableLiveData<MutableList<RepositoryDetail>>()
         val service = retrofit
                 .create<IGitHubRepositoryDetailsService>(IGitHubRepositoryDetailsService::class.java)
         service
                 .details(userRepositoryDetail.username, userRepositoryDetail.repositoryName)
-                .enqueue(object : Callback<List<RepositoryDetail>> {
-                    override fun onFailure(call: Call<List<RepositoryDetail>>?, t: Throwable?) {
+                .enqueue(object : Callback<MutableList<RepositoryDetail>> {
+                    override fun onFailure(call: Call<MutableList<RepositoryDetail>>?, t: Throwable?) {
 
                     }
 
-                    override fun onResponse(call: Call<List<RepositoryDetail>>?, response: Response<List<RepositoryDetail>>?) {
+                    override fun onResponse(call: Call<MutableList<RepositoryDetail>>?, response: Response<MutableList<RepositoryDetail>>?) {
                         response?.body()?.run {
                             result.value = this
                         }

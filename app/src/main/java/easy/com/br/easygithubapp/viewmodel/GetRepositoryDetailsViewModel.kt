@@ -18,7 +18,7 @@ class GetRepositoryDetailsViewModel @Inject constructor(private val repository: 
     private val userRepositoryDetailInput = MutableLiveData<UserRepositoryDetail>()
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
-    val repositoryDetailData: LiveData<List<RepositoryDetail>> = Transformations.switchMap(userRepositoryDetailInput) {
+    val repositoryDetailData: LiveData<MutableList<RepositoryDetail>> = Transformations.switchMap(userRepositoryDetailInput) {
         repository.getRepositoryDetails(it)
     }
 
