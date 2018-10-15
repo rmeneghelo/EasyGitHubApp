@@ -9,10 +9,10 @@ import easy.com.br.easygithubapp.repository.GitHubRepository
 import javax.inject.Inject
 
 class GetRepositoriesViewModel @Inject constructor(private val repository: GitHubRepository) : ViewModel() {
-    private var apiResultData = MutableLiveData<String>()
     val errorData = MutableLiveData<Boolean>()
     val loadingData = MutableLiveData<Boolean>()
-    private val repositoriesApiResultData: LiveData<RepositoriesApiResult> = Transformations.switchMap(apiResultData) {
+    private var apiResultData = MutableLiveData<String>()
+    private val repositoriesApiResultData: LiveData<Result<RepositoriesApiResult, String>> = Transformations.switchMap(apiResultData) {
         repository.getRepositories().apply {
             loadingData.value = true
         }
@@ -20,9 +20,13 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
 
     val repositoriesData: LiveData<List<UserRepository>> = Transformations.switchMap(repositoriesApiResultData) {
         MutableLiveData<List<UserRepository>>().apply {
-            postValue(mapResult(it)).apply {
-                loadingData.value = false
+            if (it is ValueResult) {
+                postValue(mapResult(it.value))
+            } else {
+                errorData.value = true
             }
+
+            loadingData.value = false
         }
     }
 
