@@ -16,6 +16,7 @@ import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoriesHandlerComponent
 import easy.com.br.easygithubapp.di.modules.components.GetRepositoriesHandlerComponent
+import easy.com.br.easygithubapp.domain.model.HeaderDto
 import easy.com.br.easygithubapp.domain.model.RepositoryDto
 import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoriesAdapter
@@ -49,11 +50,15 @@ class EasyGitHubActivity : AppCompatActivity() {
 
         viewModel
                 .repositoriesData
-                .observe(this, Observer<List<UserRepository>> { t -> fillRepo(t) })
+                .observe(this, Observer<List<UserRepository>> { repositoriesList -> fillRepo(repositoriesList) })
 
-        viewModel.errorData.observe(this, Observer { it?.let { setErrorVisibility(it) } })
+        viewModel
+                .headerData
+                .observe(this, Observer<HeaderDto> { header -> fillHeader(header) })
 
-        viewModel.loadingData.observe(this, Observer { it?.let { showLoading(it) } })
+        viewModel.errorData.observe(this, Observer { errorData -> errorData?.let { setErrorVisibility(it) } })
+
+        viewModel.loadingData.observe(this, Observer { loading -> loading?.let { showLoading(it) } })
 
         swipeRefresh.setOnRefreshListener(viewModel::onRefresh)
 
@@ -65,6 +70,12 @@ class EasyGitHubActivity : AppCompatActivity() {
         }
     }
 
+    private fun fillHeader(header: HeaderDto?) {
+        header?.let {
+            fillingTotalRepositories(it.totalRepositories)
+            fillingTotalOpenIssues(it.totalMoreThanHundredOpenIssues)
+        }
+    }
 
     private fun fillingRepositoriesView() {
         val mLayoutManager = LinearLayoutManager(applicationContext)
@@ -83,27 +94,23 @@ class EasyGitHubActivity : AppCompatActivity() {
         repositories_recycler_view.visibility = if (!shouldShow) View.VISIBLE else View.GONE
     }
 
-    private fun fillingTotalOpenIssues(result: RepositoryDto?) {
-        tvTotalIssues.text = getString(R.string.totalIssuesText)
-        val totalCount = SpannableString(result?.openIssuesMoreThanHundred.toString())
-
-        totalCount.let {
-            totalCount.setSpan(ForegroundColorSpan(Color.rgb(255, 165, 0)), 0, it.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tvTotalIssues.append(" $it")
+    private fun fillingTotalOpenIssues(result: Int) {
+        val text = getString(R.string.totalIssuesText)
+        SpannableString(text + result.toString()).apply {
+            this.setSpan(ForegroundColorSpan(Color.rgb(255, 165, 0)), text.length, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }.also {
+            tvTotalIssues.text = it
         }
+
+
     }
 
-    private fun fillingTotalRepositories(result: RepositoryDto?) {
-        tvTotal.text = getString(R.string.totalOfRepositoriesText)
-        val totalCount = SpannableString(result?.totalCount.toString())
-
-        totalCount.let {
-            totalCount.setSpan(ForegroundColorSpan(Color.rgb(255, 165, 0)), 0, it.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-            tvTotal.append(" $it")
+    private fun fillingTotalRepositories(result: Int) {
+        val text = getString(R.string.totalOfRepositoriesText)
+        SpannableString(text + result.toString()).apply {
+            this.setSpan(ForegroundColorSpan(Color.rgb(255, 165, 0)), text.length, this.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }.also {
+            tvTotal.text = it
         }
-    }
-
-    private fun onItemsLoadComplete() {
-        swipeRefresh.isRefreshing = false
     }
 }

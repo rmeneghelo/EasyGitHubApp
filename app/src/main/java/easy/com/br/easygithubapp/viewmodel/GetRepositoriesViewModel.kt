@@ -25,6 +25,12 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
             } else {
                 errorData.value = true
             }
+        }
+    }
+
+    val headerData: LiveData<HeaderDto> = Transformations.switchMap(repositoriesData) {
+        MutableLiveData<HeaderDto>().apply {
+            postValue(mapResultHeaderDto(it))
 
             loadingData.value = false
         }
@@ -37,8 +43,8 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
     private fun mapResult(result: RepositoriesApiResult): List<UserRepository> {
         val userRepository = mutableListOf<UserRepository>()
 
-        result.let {
-            it.items.forEach {
+        result.let { apiResult ->
+            apiResult.items.forEach {
                 userRepository.add(UserRepository(it.githubRepositoryName,
                         it.description,
                         RepositoryOwner(it.owner.authorName, it.owner.authorPhoto),
@@ -50,6 +56,19 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
         }
 
         return userRepository
+    }
+
+    private fun mapResultHeaderDto(userRepository: List<UserRepository>): HeaderDto {
+        var headerDto: HeaderDto
+
+        userRepository.let { listOfUsers ->
+            headerDto = HeaderDto().apply {
+                totalRepositories = listOfUsers.count()
+                totalMoreThanHundredOpenIssues = checkOpenIssuesMoreThanHundred(listOfUsers)
+            }
+        }
+
+        return headerDto
     }
 
     fun onRefresh() {
