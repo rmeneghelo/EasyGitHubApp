@@ -63,18 +63,40 @@ class GetRepositoriesViewModelTest {
     }
 
     @Test
+    fun `when repositories are requested, call getRepositories and return header`() {
+
+        val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
+
+        val observer: Observer<HeaderDto> = mock()
+
+        whenever(repository.getRepositories())
+                .thenReturn(repoResult)
+
+        getRepositoriesViewModel.headerData.observeForever(observer)
+
+        getRepositoriesViewModel.getRepositories()
+
+        repoResult.value = ValueResult(apiResult)
+
+        getRepositoriesViewModel.headerData.value.let {
+            assert(it?.totalRepositories == 2)
+            assert(it?.totalMoreThanHundredOpenIssues == 1)
+        }
+    }
+
+    @Test
     fun `when repositories are requested, should set loading to false`() {
 
         val repoResult = MutableLiveData<Result<RepositoriesApiResult, String>>()
 
-        val observer: Observer<List<UserRepository>> = mock()
+        val observer: Observer<HeaderDto> = mock()
 
         val observerLoading: Observer<Boolean> = mock()
 
         whenever(repository.getRepositories())
                 .thenReturn(repoResult)
 
-        getRepositoriesViewModel.repositoriesData.observeForever(observer)
+        getRepositoriesViewModel.headerData.observeForever(observer)
         getRepositoriesViewModel.loadingData.observeForever(observerLoading)
 
         getRepositoriesViewModel.getRepositories()

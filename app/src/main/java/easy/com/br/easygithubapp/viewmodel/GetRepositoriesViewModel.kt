@@ -24,6 +24,7 @@ class GetRepositoriesViewModel @Inject constructor(private val repository: GitHu
                 postValue(mapResult(it.value))
             } else {
                 errorData.value = true
+                loadingData.value = false
             }
         }
     }
