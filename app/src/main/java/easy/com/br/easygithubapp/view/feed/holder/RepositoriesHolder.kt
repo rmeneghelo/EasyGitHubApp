@@ -1,7 +1,7 @@
 package easy.com.br.easygithubapp.view.feed.holder
 
 import android.graphics.Color
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.squareup.picasso.Picasso
 import easy.com.br.easygithubapp.R

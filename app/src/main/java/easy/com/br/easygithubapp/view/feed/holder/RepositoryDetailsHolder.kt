@@ -1,6 +1,6 @@
 package easy.com.br.easygithubapp.view.feed.holder
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import com.squareup.picasso.Picasso
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail

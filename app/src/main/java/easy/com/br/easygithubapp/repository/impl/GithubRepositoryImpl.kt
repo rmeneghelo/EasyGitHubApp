@@ -1,7 +1,7 @@
 package easy.com.br.easygithubapp.repository.impl
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import easy.com.br.easygithubapp.domain.interfaces.IGithubRepositoriesService
 import easy.com.br.easygithubapp.domain.model.ErrorResult
 import easy.com.br.easygithubapp.domain.model.RepositoriesApiResult
