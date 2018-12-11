@@ -9,7 +9,7 @@ buildscript {
     ext.picasso = '2.71828'
     ext.junit = '4.12'
     ext.nhaarman_mockitokotlin2 = '2.0.0-RC1'
-    ext.appcompat = '1.0.1'
+    ext.appcompat = '1.0.2'
     ext.constraintlayout = '2.0.0-alpha2'
     ext.recyclerview = '1.0.0'
     ext.lifecycle = '2.0.0'
