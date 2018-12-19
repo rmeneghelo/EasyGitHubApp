@@ -1,39 +1,34 @@
 package easy.com.br.easygithubapp.view
 
-import androidx.lifecycle.Observer
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import android.view.View
+import dagger.android.support.DaggerAppCompatActivity
 import easy.com.br.easygithubapp.R
 import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.di.modules.RetrofitModule
-import easy.com.br.easygithubapp.di.modules.components.DaggerGetRepositoryDetailsHandlerComponent
-import easy.com.br.easygithubapp.di.modules.components.GetRepositoryDetailsHandlerComponent
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.domain.model.UserRepositoryDetail
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoryDetailsAdapter
 import easy.com.br.easygithubapp.viewmodel.GetRepositoryDetailsViewModel
 import kotlinx.android.synthetic.main.activity_easy_git_hub_details.*
+import javax.inject.Inject
 
-class EasyGitHubDetailsActivity : AppCompatActivity() {
+class EasyGitHubDetailsActivity : DaggerAppCompatActivity() {
     private lateinit var repositoryDetailAdapter: RepositoryDetailsAdapter
+
+    @Inject
+    lateinit var viewModel: GetRepositoryDetailsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_easy_git_hub_details)
 
-        val component: GetRepositoryDetailsHandlerComponent = DaggerGetRepositoryDetailsHandlerComponent
-                .builder()
-                .gitHubRepositoryModule(GitHubRepositoryModule())
-                .retrofitModule(RetrofitModule())
-                .build()
-
         repositoryDetailAdapter = RepositoryDetailsAdapter()
-
-        val viewModel: GetRepositoryDetailsViewModel = component.getRepositoryDetailsViewModel()
 
         fillingRepositoriesView()
 
