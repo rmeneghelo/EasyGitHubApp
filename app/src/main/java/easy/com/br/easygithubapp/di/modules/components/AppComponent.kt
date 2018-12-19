@@ -15,7 +15,7 @@ import javax.inject.Singleton
     AndroidSupportInjectionModule::class,
     AppModule::class,
     RetrofitModule::class,
-    GetRepositoriesHandlerModule::class,
+    GitHubViewModelModule::class,
     ActivityBindingModule::class,
     GitHubRepositoryModule::class
     ])

@@ -8,7 +8,7 @@ import easy.com.br.easygithubapp.repository.GitHubRepository
 import easy.com.br.easygithubapp.viewmodel.GetRepositoryDetailsViewModel
 
 @Module
-class GetRepositoriesHandlerModule {
+class GitHubViewModelModule {
     @Provides
     fun provideGetRepositoriesViewModel(gitHubRepository: GitHubRepository): GetRepositoriesViewModel {
         return GetRepositoriesViewModel(gitHubRepository)
