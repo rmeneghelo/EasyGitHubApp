@@ -7,7 +7,6 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
 import easy.com.br.easygithubapp.R
-import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
 import easy.com.br.easygithubapp.domain.model.HeaderDto
 import easy.com.br.easygithubapp.domain.model.UserRepository
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoriesAdapter

@@ -2,15 +2,12 @@ package easy.com.br.easygithubapp.view
 
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.android.support.DaggerAppCompatActivity
 import easy.com.br.easygithubapp.R
-import easy.com.br.easygithubapp.di.modules.GitHubRepositoryModule
-import easy.com.br.easygithubapp.di.modules.RetrofitModule
 import easy.com.br.easygithubapp.domain.model.RepositoryDetail
 import easy.com.br.easygithubapp.domain.model.UserRepositoryDetail
 import easy.com.br.easygithubapp.view.feed.adapter.RepositoryDetailsAdapter
